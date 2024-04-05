@@ -4,10 +4,24 @@
 
 {% block body %}
     <h1>About</h1>
-    <p>An image which can be clicked on.</p>
-    <a href="{{ asset('img/glider.svg') }}">
-        <img src="{{ asset('img/glider.svg') }}" alt="">
-    </a>
-
-    <img src="{{ asset('build/images/background.jpg') }}" alt="">
+    <div class="container">
+        <div class="column">
+            <h2>MVC</h2>
+                <p>Kursen Objektorienterade webbteknologier, a.k.a. mvc, fokuserar på objektorienterade programmeringstekniker i programmeringsspråket PHP. Klassiska objektorienterade konstruktioner hanteras tillsammans med objektorienterad programmering i webbaserat ramverk tillsammans med databaser samt enhetstestning.</p>
+                <a href="https://github.com/dbwebb-se/mvc">
+                <img src="{{ asset('img/glider.svg') }}" alt="">
+                <br>
+                <a href = "https://github.com/dbwebb-se/mvc">GitHub<a>
+            </a>
+        </div>
+        <div class="column">
+            <h2>Me</h2>
+            <p>This is where your second column content goes.</p>
+            <img src="{{ asset('build/images/ronald.jpg') }}" alt="" class="rounded meimg">
+            <br>
+            <br>
+            <p>Me - josf23's:</p>
+            <a href="https://github.com/CCenjoyer/mvc">GitHub<a>
+        </div>
+    </div>
 {% endblock %}
