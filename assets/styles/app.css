@@ -1,15 +1,70 @@
+html {
+    background-color: rgb(238, 238, 238);
+}
+
 body {
-    background-image: url('../images/background.jpg');
-    background-size: cover; /* Ensure the background image covers the entire container */
+    background-color: white;
+    justify-content: center;
+    margin: auto;
+    max-width: 1250px;
+    border: 1px solid rgb(128, 128, 128);
 }
 
 header {
     height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    font-weight: 100;
+}
+
+.header-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: lightgrey;
+    min-height: 45px;
+    border-bottom: 1px solid grey;
+}
+
+.header-nav ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    padding-left: 1em;
+    padding-top: 1em;
+    margin: 0;
+}
+
+.header-nav ul li {
+    margin-right: 10px;
+    height: 40px;
+    justify-content: center;
+    text-align: center;
+}
+
+.header-nav ul li:last-child {
+    margin-right: 0;
+}
+
+.header-nav ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.header-nav ul li a:hover {
+    color: white;
+    background-color: grey;
 }
 
 main {
     margin: 0 auto;
-    max-width: 700px;
+    max-width: 70%;
+}
+
+footer {
+    padding-top: 3em;
 }
 
 h1 {
@@ -46,7 +101,7 @@ h1 {
     left: 50px;
     width: 150px;
     height: calc(100% - 60px);
-    background-color: #f0f0f0;
+    background-color: (238, 238, 238);
     padding-top: 20px;
     z-index: 1;
     overflow-y: auto;
@@ -84,4 +139,9 @@ h1 {
 .kmomtextheader {
     padding-top: 2em;
     padding-bottom: 0em;
+}
+
+.kmom-text {
+    font-family: sans-serif;
+    font-size: 0.9em;
 }
