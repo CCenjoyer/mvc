@@ -6,14 +6,13 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 class QuoteControllerJson
 {
     #[Route("/api")]
     public function jsonRoutes(): Response
     {
         $data = [
-            'quote' => "/api/quote" 
+            'quote' => "/api/quote"
         ];
 
         $response = new JsonResponse($data);

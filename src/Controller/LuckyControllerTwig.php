@@ -8,7 +8,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class LuckyControllerTwig extends AbstractController
 {
-
     #[Route("/lucky", name: "lucky")]
     public function lucky(): Response
     {
