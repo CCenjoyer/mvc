@@ -4,17 +4,24 @@ namespace App\Cards;
 
 class Card
 {
-    protected $value;
+    protected ?string $suit;
+    protected ?int $value;
 
     public function __construct()
     {
+        $this->suit = null;
         $this->value = null;
     }
 
-    public function roll(): int
+
+    public function assignValue(int $value): void
     {
-        $this->value = random_int(1, 6);
-        return $this->value;
+        $this->value = $value;
+    }
+
+    public function assignSuit(string $suit): void
+    {
+        $this->suit = $suit;
     }
 
     public function getValue(): ?int
@@ -22,8 +29,13 @@ class Card
         return $this->value;
     }
 
+    public function getSuit(): ?string
+    {
+        return $this->suit;
+    }
+
     public function getAsString(): string
     {
-        return "[{$this->value}]";
+        return "[{$this->suit} {$this->value}]";
     }
 }

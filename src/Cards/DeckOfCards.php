@@ -4,26 +4,34 @@ namespace App\Cards;
 
 class DeckOfCards
 {
-    protected $value;
+    protected $cards;
 
     public function __construct()
     {
-        $this->value = null;
+        $this->cards = [];
+    }
+    
+    public function addCard(CardGraphic $card): void
+    {
+        $this->cards[] = $card;
     }
 
-    public function roll(): int
+    public function getCards(): array
     {
-        $this->value = random_int(1, 6);
-        return $this->value;
+        return $this->cards;
     }
 
-    public function getValue(): ?int
+    public function makeDeck(): void
     {
-        return $this->value;
-    }
-
-    public function getAsString(): string
-    {
-        return "[{$this->value}]";
+        $this->cards = [];
+        $suits = ['diamond', 'heart', 'club', 'spade'];
+        foreach ($suits as $suit) {
+            for ($value = 2; $value <= 14; $value++) {
+                $card = new CardGraphic();
+                $card->assignSuit($suit);
+                $card->assignValue($value);
+                $this->addCard($card);
+            }
+        }
     }
 }

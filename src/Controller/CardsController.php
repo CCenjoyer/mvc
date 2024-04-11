@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Cards\Card;
+use App\Cards\CardGraphic;
 use App\Cards\CardHand;
 use App\Cards\DeckOfCards;
 
@@ -43,9 +44,35 @@ class CardsController extends AbstractController
 
 
         $deck = new DeckOfCards();
+        $deck->makeDeck();
         $session->set("deck", $deck);
-    
 
-        return $this->render('cards/card.html.twig');
+        $card = new CardGraphic();
+        $card->assignSuit("spade");
+        $card->assignValue(11);
+    
+        $data = [
+            'card' => $card
+        ];
+        return $this->render('cards/card.html.twig', $data);
     }
+
+
+
+    #[Route("/card/deck", name: "deck", methods: ['GET'])]
+    public function deck(
+        SessionInterface $session
+    ): Response {
+
+        $deck = $session->get("deck");
+        $cards = $deck->getCards();
+
+
+        $data = [
+            "cards" => $cards
+        ];
+
+        return $this->render('cards/deck.html.twig', $data);
+    }
+
 }

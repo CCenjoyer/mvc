@@ -194,3 +194,7 @@ h1 {
     background-color: #f8d7da;
     border-color: #f5c6cb;
 }
+
+.card {
+    font-size: 10em;
+}
