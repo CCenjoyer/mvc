@@ -25,6 +25,10 @@ class CardsController extends AbstractController
         SessionInterface $session
     ): Response {
         $session->clear();
+        $this->addFlash(
+            'success',
+            'Session was Cleared'
+        );
         return $this->redirectToRoute('session');
     }
 }

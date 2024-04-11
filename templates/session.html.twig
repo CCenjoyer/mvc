@@ -3,6 +3,7 @@
 
 {% block body %}
     <h1>Session Storage</h1>
+    {{ include('flash.html.twig') }}
     <p>The session contains:</p>
     {{ dump(app.session.all) }}
 
