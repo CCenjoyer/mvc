@@ -24,4 +24,9 @@
                 onClick="this.form.action='{{ path('card_init') }}';">
         </p>
     </form>
+    <form method="post" action="{{ path('draw_form') }}">
+        <label for="num">Draw X cards:</label>
+        <input type="number" id="num" name="num" min="1" required>
+        <button type="submit">Draw</button>
+    </form>
 {% endblock %}
