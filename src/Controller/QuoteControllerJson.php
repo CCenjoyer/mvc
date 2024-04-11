@@ -3,11 +3,28 @@
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use App\Cards\CardHand;
+use App\Cards\DeckOfCards;
+
 class QuoteControllerJson
 {
+    private function initSession(
+        SessionInterface $session
+        ): void
+    {
+        if (!$session->has("hand")) {
+            $session->set("hand", new CardHand());
+        }
+        if (!$session->has("deck")) {
+            $deck = new DeckOfCards();
+            $deck->makeDeck();
+            $session->set("deck", $deck);
+        }
+    }
     #[Route("/api")]
     public function jsonRoutes(): Response
     {
@@ -44,6 +61,22 @@ class QuoteControllerJson
         ];
 
         $response = new JsonResponse($data);
+        $response->setEncodingOptions(
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT
+        );
+        return $response;
+    }
+
+    #[Route("/api/deck")]
+    public function deck(
+        SessionInterface $session
+    ): Response
+    {
+        $this->initSession($session);
+        $deck = $session->get("deck");
+
+        $deckData = $deck->getCards();
+        $response = new JsonResponse($deckData);
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT
         );

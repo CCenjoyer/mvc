@@ -180,4 +180,6 @@ class CardsController extends AbstractController
             $numCards = $request->request->get('num');
             return $this->redirectToRoute('drawX', ['num' => $numCards]);
         }
+
+
 }
