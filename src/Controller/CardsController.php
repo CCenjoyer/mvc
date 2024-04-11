@@ -2,6 +2,10 @@
 
 namespace App\Controller;
 
+use App\Cards\Card;
+use App\Cards\CardHand;
+use App\Cards\DeckOfCards;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,8 +31,21 @@ class CardsController extends AbstractController
         $session->clear();
         $this->addFlash(
             'success',
-            'Session was Cleared'
+            'Session was successfully cleared'
         );
         return $this->redirectToRoute('session');
+    }
+
+    #[Route("/card", name: "card")]
+    public function card(
+        SessionInterface $session
+    ): Response {
+
+
+        $deck = new DeckOfCards();
+        $session->set("deck", $deck);
+    
+
+        return $this->render('cards/card.html.twig');
     }
 }
