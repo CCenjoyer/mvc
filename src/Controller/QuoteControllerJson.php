@@ -25,16 +25,22 @@ class QuoteControllerJson
             $session->set("deck", $deck);
         }
     }
+
     #[Route("/api")]
     public function jsonRoutes(): Response
     {
         $data = [
-            'quote' => "/api/quote"
+            'quote' => "/api/quote",
+            'deck' => "/api/deck",
+            'shuffle' => "/api/shuffle",
+            'draw' => "/api/draw",
+            'drawX' => "/api/draw/:<num>"
+
         ];
 
         $response = new JsonResponse($data);
         $response->setEncodingOptions(
-            $response->getEncodingOptions() | JSON_PRETTY_PRINT
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
         );
         return $response;
     }
@@ -62,23 +68,7 @@ class QuoteControllerJson
 
         $response = new JsonResponse($data);
         $response->setEncodingOptions(
-            $response->getEncodingOptions() | JSON_PRETTY_PRINT
-        );
-        return $response;
-    }
-
-    #[Route("/api/deck")]
-    public function deck(
-        SessionInterface $session
-    ): Response
-    {
-        $this->initSession($session);
-        $deck = $session->get("deck");
-
-        $deckData = $deck->getCards();
-        $response = new JsonResponse($deckData);
-        $response->setEncodingOptions(
-            $response->getEncodingOptions() | JSON_PRETTY_PRINT
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
         );
         return $response;
     }

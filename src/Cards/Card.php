@@ -36,6 +36,25 @@ class Card
 
     public function getAsString(): string
     {
-        return "[{$this->suit} {$this->value}]";
+        $value = $this->value;
+        switch ($value) {
+            case 11:
+                $valueStr = 'Jack';
+                break;
+            case 12:
+                $valueStr = 'Queen';
+                break;
+            case 13:
+                $valueStr = 'King';
+                break;
+            case 14:
+                $valueStr = 'Ace';
+                break;
+            default:
+                $valueStr = (string)$value;
+                break;
+        }
+
+        return "{$this->suit} {$valueStr}";
     }
 }
