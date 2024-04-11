@@ -13,6 +13,7 @@
     <span class="die">{{ value }}</span>
 {% endfor %}
 </p>
+{{ include('pig/flash.html.twig') }}
 <form method="post" action="">
     <p>
         <input type="submit" name="roll" value="Roll"
