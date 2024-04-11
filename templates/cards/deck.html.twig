@@ -4,6 +4,12 @@
 
 {% block body %}
     <h1>Deck</h1>
+    <form method="post" action="">
+        <p>
+            <input type="submit" value="< Hand"
+                onClick="this.form.action='{{ path('card') }}';">
+        </p>
+    </form>
     <span class="card">
     {% for card in cards %}
         {{ card.getAsCard() }}

@@ -4,26 +4,20 @@ namespace App\Cards;
 
 class CardHand
 {
-    protected $value;
+    protected $cards;
 
     public function __construct()
     {
-        $this->value = null;
+        $this->cards = [];
     }
 
-    public function roll(): int
+    public function addCard(CardGraphic $card): void
     {
-        $this->value = random_int(1, 6);
-        return $this->value;
+        $this->cards[] = $card;
     }
 
-    public function getValue(): ?int
+    public function getCards(): ?array
     {
-        return $this->value;
-    }
-
-    public function getAsString(): string
-    {
-        return "[{$this->value}]";
+        return $this->cards;
     }
 }

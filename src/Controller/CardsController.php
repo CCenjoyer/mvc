@@ -15,6 +15,20 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CardsController extends AbstractController
 {
+    private function initSession(
+        SessionInterface $session
+        ): void
+    {
+        if (!$session->has("hand")) {
+            $session->set("hand", new CardHand());
+        }
+        if (!$session->has("deck")) {
+            $deck = new DeckOfCards();
+            $deck->makeDeck();
+            $session->set("deck", $deck);
+        }
+    }
+
     #[Route("/session", name: "session")]
     public function showSession(
         SessionInterface $session
@@ -37,42 +51,84 @@ class CardsController extends AbstractController
         return $this->redirectToRoute('session');
     }
 
+    #[Route("/card/init", name: "card_init")]
+    public function init(
+        SessionInterface $session
+    ): Response {
+        $hand = new CardHand();
+        $deck = new DeckOfCards();
+        $deck->makeDeck();
+        $session->set("hand", $hand);
+        $session->set("deck", $deck);
+        return $this->redirectToRoute('card');
+    }
+
+
+
     #[Route("/card", name: "card")]
     public function card(
         SessionInterface $session
     ): Response {
-
-
-        $deck = new DeckOfCards();
-        $deck->makeDeck();
-        $session->set("deck", $deck);
-
-        $card = new CardGraphic();
-        $card->assignSuit("spade");
-        $card->assignValue(11);
-    
+        $this->initSession($session);
+        $hand = $session->get("hand");
+        $cards = $hand->getCards();
         $data = [
-            'card' => $card
+            "cards" => $cards
         ];
         return $this->render('cards/card.html.twig', $data);
     }
-
 
 
     #[Route("/card/deck", name: "deck", methods: ['GET'])]
     public function deck(
         SessionInterface $session
     ): Response {
-
+        $this->initSession($session);
         $deck = $session->get("deck");
-        $cards = $deck->getCards();
-
-
+        $sortedDeck = clone $deck;
+        $sortedDeck->sort();
+        $cards = $sortedDeck->getCards();
         $data = [
             "cards" => $cards
         ];
-
         return $this->render('cards/deck.html.twig', $data);
+    }
+
+
+    #[Route("/card/deck/shuffle", name: "shuffle", methods: ['GET'])]
+    public function shuffle(
+        SessionInterface $session
+    ): Response {
+        $this->initSession($session);
+        $deck = $session->get("deck");
+        $deck->shuffle();
+        $cards = $deck->getCards();
+        $data = [
+            "cards" => $cards
+        ];
+        return $this->render('cards/deck.html.twig', $data);
+    }
+
+    #[Route("/card/deck/draw", name: "draw", methods: ['GET'])]
+    public function draw(
+        SessionInterface $session
+    ): Response {
+        $this->initSession($session);
+        $deck = $session->get("deck");
+        $hand = $session->get("hand");
+        if ($deck->getCards() != []) {
+            $card = $deck->drawCard();
+            $hand->addCard($card);
+            $cardCount = $deck->cardCount();
+            $session->set("hand", $hand);
+            $session->set("deck", $deck);
+            $data = [
+                "card" => $card,
+                "deckCardCount" => $cardCount
+            ];
+            return $this->render('cards/draw.html.twig', $data);
+        }
+        return $this->redirectToRoute('cards');
     }
 
 }

@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Cards{% endblock %}
+
+{% block body %}
+    <h1>Drawn Card:</h1>
+    <form method="post" action="">
+        <p>
+            <input type="submit" value="< Hand"
+                onClick="this.form.action='{{ path('card') }}';">
+        </p>
+    </form>
+
+    <div class="card">{{ card }}</div>
+
+    <h3>Cards remaining: {{ deckCardCount }}</h3>
+
+
+    <form method="get" action="">
+        <p>
+            <input type="submit" value="Draw a Card"
+                onClick="this.form.action='{{ path('draw') }}';">
+        </p>
+    </form>
+{% endblock %}

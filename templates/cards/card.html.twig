@@ -3,10 +3,26 @@
 {% block title %}Cards{% endblock %}
 
 {% block body %}
-    <h1>Cards</h1>
-    <span class ="card">{{ card }}</span>
+    <h1>Hand  |  Cards</h1>
+    <span class ="card"></span>
 
-    <a href="card/deck">View Deck</a>
-    <a href="card/shuffle">Shuffle Deck</a>
-    <a href="card/draw">Draw Card</a>
+
+    {% for card in cards %}
+        <span class="card">{{ card.getAsCard() }}</span>
+    {% endfor %}
+    <br>
+    
+
+    <form method="get" action="">
+        <p>
+            <input type="submit" value="View Deck"
+                onClick="this.form.action='{{ path('deck') }}';">
+            <input type="submit" value="Shuffle"
+                onClick="this.form.action='{{ path('shuffle') }}';">
+            <input type="submit" value="Draw a Card"
+                onClick="this.form.action='{{ path('draw') }}';">
+            <input type="submit" value="Reset"
+                onClick="this.form.action='{{ path('card_init') }}';">
+        </p>
+    </form>
 {% endblock %}
