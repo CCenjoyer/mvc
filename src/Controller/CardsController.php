@@ -63,8 +63,6 @@ class CardsController extends AbstractController
         return $this->redirectToRoute('card');
     }
 
-
-
     #[Route("/card", name: "card")]
     public function card(
         SessionInterface $session
