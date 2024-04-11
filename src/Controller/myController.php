@@ -31,4 +31,10 @@ class myController extends AbstractController
     {
         return $this->render('report.html.twig');
     }
+
+    #[Route("/session", name: "session")]
+    public function session(): Response
+    {
+        return $this->render('session.html.twig');
+    }
 }
