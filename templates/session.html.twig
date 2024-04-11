@@ -1,0 +1,9 @@
+{% extends "base.html.twig" %}
+
+
+{% block body %}
+    <h1>Session Storage</h1>
+    <p>The session contains:</p>
+    {{ dump(app.session.all) }}
+
+{% endblock %}
