@@ -4,9 +4,8 @@
 
 {% block body %}
     <h1>Hand  |  Cards</h1>
-    <span class ="card"></span>
 
-
+    {{ include('flash.html.twig') }}
     {% for card in cards %}
         <span class="card">{{ card.getAsCard() }}</span>
     {% endfor %}
