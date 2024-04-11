@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CardsController extends AbstractController
 {
     #[Route("/session", name: "session")]
-    public function initCallback(
+    public function showSession(
         SessionInterface $session
     ): Response {
         $data = [
@@ -20,4 +20,11 @@ class CardsController extends AbstractController
         return $this->render('session.html.twig', $data);
     }
 
+    #[Route("/session/delete", name: "session/delete")]
+    public function deleteSession(
+        SessionInterface $session
+    ): Response {
+        $session->clear();
+        return $this->redirectToRoute('session');
+    }
 }
