@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+
+{% block title %}API Page{% endblock %}
+
+{% block body %}
+    <h1>API</h1>
+
+    <h2>Quote</h2>
+    <form method="post" action="{{ path('quote') }}">
+        <button type="submit">Get Quote</button>
+    </form>
+
+
+    <br>
+    <h2>Deck</h2>
+    <form method="post" action="{{ path('api_deck') }}">
+        <button type="submit">Get Deck</button>
+    </form>
+    <br>
+    <form method="post" action="{{ path('api_shuffle') }}">
+        <button type="submit">Shuffle Deck</button>
+    </form>
+    <br>
+    <form method="post" action="{{ path('api_draw') }}">
+        <button type="submit">Draw Card</button>
+    </form>
+    <br>
+    <form method="post" action="{{ path('draw_x_form') }}">
+        <label for="num">Number of Cards:</label>
+        <input type="number" id="num" name="num" min="1" required>
+        <button type="submit">Draw</button>
+    </form>
+{% endblock %}

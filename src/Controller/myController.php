@@ -37,4 +37,19 @@ class myController extends AbstractController
     {
         return $this->render('session.html.twig');
     }
+
+    #[Route("/api", name: "api")]
+    public function jsonRoutes(): Response
+    {
+        // $data = [
+        //     'quote' => "/api/quote",
+        //     'deck' => "/api/deck",
+        //     'shuffle' => "/api/shuffle",
+        //     'draw' => "/api/draw",
+        //     'drawX' => "/api/draw/:<num>"
+
+        // ];
+
+        return $this->render('api.html.twig');
+    }
 }

@@ -7,45 +7,9 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-use App\Cards\CardHand;
-use App\Cards\DeckOfCards;
-
 class QuoteControllerJson
 {
-    private function initSession(
-        SessionInterface $session
-        ): void
-    {
-        if (!$session->has("hand")) {
-            $session->set("hand", new CardHand());
-        }
-        if (!$session->has("deck")) {
-            $deck = new DeckOfCards();
-            $deck->makeDeck();
-            $session->set("deck", $deck);
-        }
-    }
-
-    #[Route("/api")]
-    public function jsonRoutes(): Response
-    {
-        $data = [
-            'quote' => "/api/quote",
-            'deck' => "/api/deck",
-            'shuffle' => "/api/shuffle",
-            'draw' => "/api/draw",
-            'drawX' => "/api/draw/:<num>"
-
-        ];
-
-        $response = new JsonResponse($data);
-        $response->setEncodingOptions(
-            $response->getEncodingOptions() | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
-        );
-        return $response;
-    }
-
-    #[Route("/api/quote")]
+    #[Route("/api/quote", name: "quote")]
     public function jsonNumber(): Response
     {
         $quotes = [

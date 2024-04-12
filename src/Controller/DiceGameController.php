@@ -132,7 +132,6 @@ class DiceGameController extends AbstractController
     ): Response {
         $hand = $session->get("pig_dicehand");
         $hand->roll();
-
         $roundTotal = $session->get("pig_round");
         $round = 0;
         $values = $hand->getValues();
