@@ -198,3 +198,8 @@ h1 {
 .card {
     font-size: 10em;
 }
+
+#card-uml {
+    text-align: center;
+    justify-content: center;
+}

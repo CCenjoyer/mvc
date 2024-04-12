@@ -6,11 +6,6 @@
     <h1>Card Hand</h1>
 
     {{ include('flash.html.twig') }}
-    {% for card in cards %}
-        <span class="card">{{ card.getAsCard() }}</span>
-    {% endfor %}
-    <br>
-    
 
     <form method="get" action="">
         <p>
@@ -22,6 +17,7 @@
                 onClick="this.form.action='{{ path('draw') }}';">
             <input type="submit" value="Reset"
                 onClick="this.form.action='{{ path('card_init') }}';">
+            <a href="{{ path('card_docs') }}">Docs</a>
         </p>
     </form>
     <form method="post" action="{{ path('draw_form') }}">
@@ -29,5 +25,9 @@
         <input type="number" id="num" name="num" min="1" required>
         <button type="submit">Draw</button>
     </form>
+    <br>
+    {% for card in cards %}
+        <span class="card">{{ card.getAsCard() }}</span>
+    {% endfor %}
 
 {% endblock %}

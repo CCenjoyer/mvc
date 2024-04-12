@@ -178,5 +178,10 @@ class CardsController extends AbstractController
         return $this->redirectToRoute('drawX', ['num' => $numCards]);
     }
 
+    #[Route("/card/doc", name: "card_docs")]
+    public function cardDocs(): Response {
+        return $this->render('cards/carddoc.html.twig');
+    }
+
 
 }
