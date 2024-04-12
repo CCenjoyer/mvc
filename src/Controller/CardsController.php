@@ -179,7 +179,8 @@ class CardsController extends AbstractController
     }
 
     #[Route("/card/doc", name: "card_docs")]
-    public function cardDocs(): Response {
+    public function cardDocs(): Response
+    {
         return $this->render('cards/carddoc.html.twig');
     }
 
