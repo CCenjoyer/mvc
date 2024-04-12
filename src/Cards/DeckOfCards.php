@@ -10,7 +10,7 @@ class DeckOfCards
     {
         $this->cards = [];
     }
-    
+
     public function addCard(CardGraphic $card): void
     {
         $this->cards[] = $card;

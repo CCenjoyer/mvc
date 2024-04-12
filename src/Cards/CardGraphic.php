@@ -37,7 +37,8 @@ class CardGraphic extends Card
         return $this->representation[$this->suit][$this->value];
     }
 
-    public function __toString() {
+    public function __toString()
+    {
         return $this->getAsCard();
     }
 }

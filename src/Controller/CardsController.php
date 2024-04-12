@@ -13,13 +13,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 class CardsController extends AbstractController
 {
     private function initSession(
         SessionInterface $session
-        ): void
-    {
+    ): void {
         if (!$session->has("hand")) {
             $session->set("hand", new CardHand());
         }
@@ -138,8 +136,7 @@ class CardsController extends AbstractController
     public function multipleDraw(
         int $num,
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         $this->initSession($session);
         $deck = $session->get("deck");
         $hand = $session->get("hand");
@@ -175,12 +172,11 @@ class CardsController extends AbstractController
 
     #[Route("/card/deck/draw-form", name: "draw_form")]
     public function drawForm(
-            Request $request
-        ): Response
-        {
-            $numCards = $request->request->get('num');
-            return $this->redirectToRoute('drawX', ['num' => $numCards]);
-        }
+        Request $request
+    ): Response {
+        $numCards = $request->request->get('num');
+        return $this->redirectToRoute('drawX', ['num' => $numCards]);
+    }
 
 
 }

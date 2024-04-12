@@ -18,8 +18,7 @@ class JsonApiController extends AbstractController
 {
     private function initSession(
         SessionInterface $session
-        ): void
-    {
+    ): void {
         if (!$session->has("hand")) {
             $session->set("hand", new CardHand());
         }
@@ -106,7 +105,8 @@ class JsonApiController extends AbstractController
             $response->setEncodingOptions(
                 $response->getEncodingOptions() | JSON_PRETTY_PRINT
             );
-            return $response;;
+            return $response;
+            ;
         } else {
             return new JsonResponse(['error' => 'Deck or hand not found in session'], Response::HTTP_NOT_FOUND);
         }

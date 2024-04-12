@@ -6,5 +6,9 @@
     {{ include('flash.html.twig') }}
     <p>The session contains:</p>
     {{ dump(app.session.all) }}
+    
+    <form method="get" action="{{ path('session/delete') }}">
+        <button type="submit">Clear Session</button>
+    </form>
 
 {% endblock %}
