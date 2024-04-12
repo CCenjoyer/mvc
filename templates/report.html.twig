@@ -69,26 +69,37 @@
         Arv är när ett nytt objekt av en viss klass <em>ärver</em> både metoder och atribut från en förälder-klass. T.ex. Dog extends Animal, Dog ärver metoder och attribut från Animal klassen.
         Därav kan alla objekt som ärver från Animal-klassen ta använding av dess metoder.
         <br>
-        Komposition är när en klass tar använder en annan klass.
-
+        Komposition är när en klass använder en annan klass som en del av sin struktur, ofta genom att skapa denna nya klassen inom sig.
         <br>
-        Trait är en samling av metoder som tillger funktionalitet, som vilket objekt som helst kan ta användning av genom att importera dem. 
-            
+        Ett interface kan ses som ett "kontrakt" som ger ett objekt tillgång till de metoder som hör till interfacet på vilkoret att objektet följer ett visst uppsatt standard av interfacet.
+        <br>
+        Trait är en samling av metoder som tillger funktionalitet och som kan återanvändas över flera klasser genom att importera dem. 
         </p>
         
         <h3 class="kmomtextheader"><strong>Berätta om din implementation från uppgiften. Hur löste du uppgiften, är du nöjd/missnöjd, vilken förbättringspotential ser du i din koden och dina klasser?</strong></h3>
         <p class="kmom-text">
-        
+        Jag försökte så mycket som möjligt ta använding av det som fanns i <em>pig</em> övningen med routes, formulär och också struktur på objekten. Precis som i DiceGraphic i övningen så tillförser CardGraphic en
+        representativ utf-8 symbol för att matcha motsvarande kort. Jag försökte också hålla klasserna så simpla som möjligt, då jag inte är helt säker på vad som kommer behöver göras med dem i kommande kmom.
+        Jag blev nöjd med utseendet, layouten och hur det känns att navigera mellan sidorna.
+        Behöver fixa värden på korten, ess har just nu har endast värdet 14 men ska ju kunna ha värdet 1 också.
         </p>
         
         <h3 class="kmomtextheader"><strong>Vilka är dina reflektioner så här långt med att jobba i Symfony med applikationskod enligt MVC?</strong></h3>
         <p class="kmom-text">
-        
+        Det känns bättre att jobba med routes in jämförelse med tidigare kurser. Detta kan dels vara på grund av att jag har arbetat så mycket med olika rutt-strukturer nu att jag bara vant mig, tycker att
+        express och symfony kändes ganska lika till hur dem hanterade routes. Filsystemet kan vara lite jobbigt att navigera igenom dock. Också, att direkt spara objekt i sessionen är nyt för mig.
+        <br><br>
+        Varje gång vi arbetat med object och session innan, har vi behövt översätta objektets innehåll till ett nytt format och sätta in det i session, och sedan återskapa ett nytt objekt av samma
+        klass som importerar innehållet som sparats i session för att skapa ett nytt objekt med samma innehåll. Dock, medans jag tycker att spara ett objekt i session är <em>'smidigt'</em>, så tror
+        jag bara att det är mer <em>'convenient'</em> fast har inte är särskilt stor effekt på utvecklingen i jämförelse med att ge klassen du arbetar med två nya metoder.
         </p>
         
         <h3 class="kmomtextheader"><strong>Vilken är din TIL för detta kmom?</strong></h3>
         <p class="kmom-text">
-        
+        I detta Kmom har jag lär mig hur man skapar och utvecklar et nytt projekt/sida från grunden upp i symfony. Hur man arbetar med session och objekt inom php/symfony samt mer navigering
+        mellan routes och att skapa både get/post formulär som interagerar med dessa routes.
+        <br><br>
+        Jag har också arbetat med objekt inom php, därav också arv och komposition mellan klasser samt också att visa upp Jsons som representerar innehållet inom dessa objekt.
         </p>
     </div>
 
