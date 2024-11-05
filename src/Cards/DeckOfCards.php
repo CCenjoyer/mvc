@@ -2,8 +2,13 @@
 
 namespace App\Cards;
 
+use Exception;
+
 class DeckOfCards
 {
+    /**
+     * @var CardGraphic[]
+     */
     protected $cards;
 
     public function __construct()
@@ -16,6 +21,9 @@ class DeckOfCards
         $this->cards[] = $card;
     }
 
+    /**
+     * @return CardGraphic[]
+     */
     public function getCards(): array
     {
         return $this->cards;
@@ -42,7 +50,11 @@ class DeckOfCards
 
     public function drawCard(): CardGraphic
     {
-        return array_shift($this->cards);
+        $card = array_shift($this->cards);
+        if ($card === null) {
+            throw new Exception("No cards left in the deck");
+        }
+        return $card;
     }
 
     public function cardCount(): int

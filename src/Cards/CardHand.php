@@ -4,6 +4,9 @@ namespace App\Cards;
 
 class CardHand
 {
+    /**
+     * @var CardGraphic[]
+     */
     protected $cards;
 
     public function __construct()
@@ -16,6 +19,9 @@ class CardHand
         $this->cards[] = $card;
     }
 
+    /**
+     * @return CardGraphic[]
+     */
     public function getCards(): array
     {
         return $this->cards;
