@@ -40,11 +40,8 @@ class DeckOfCards
         shuffle($this->cards);
     }
 
-    public function drawCard(): ?CardGraphic
+    public function drawCard(): CardGraphic
     {
-        if (empty($this->cards)) {
-            return null;
-        }
         return array_shift($this->cards);
     }
 

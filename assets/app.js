@@ -8,5 +8,5 @@
 import './styles/app.css';
 import hello from './js/hello.js';
 
-console.log(hello())
+console.log(hello());
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');

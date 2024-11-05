@@ -34,25 +34,24 @@ class JsonApiController extends AbstractController
     {
         $this->initSession($session);
         $deck = $session->get("deck");
-        if ($deck) {
-            $deckClone = clone $deck;
-            $cardsData = [];
-            $deckClone->sort();
-            foreach ($deckClone->getCards() as $card) {
-                $cardsData[] = $card->getAsString();
-            }
-            $deckData = [
-                'cards' => $cardsData,
-                'count' => $deckClone->cardCount()
-            ];
-            $response = new JsonResponse($deckData);
-            $response->setEncodingOptions(
-                $response->getEncodingOptions() | JSON_PRETTY_PRINT
-            );
-            return $response;
-        } else {
+        if (!$deck) {
             return new JsonResponse(['error' => 'Deck not found in session'], Response::HTTP_NOT_FOUND);
         }
+        $deckClone = clone $deck;
+        $cardsData = [];
+        $deckClone->sort();
+        foreach ($deckClone->getCards() as $card) {
+            $cardsData[] = $card->getAsString();
+        }
+        $deckData = [
+            'cards' => $cardsData,
+            'count' => $deckClone->cardCount()
+        ];
+        $response = new JsonResponse($deckData);
+        $response->setEncodingOptions(
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT
+        );
+        return $response;
     }
 
     #[Route("/api/deck/shuffle", name: "api_shuffle", methods: ['POST'])]
@@ -61,29 +60,28 @@ class JsonApiController extends AbstractController
         $this->initSession($session);
         $deck = $session->get("deck");
 
-        if ($deck) {
-            if ($deck->cardCount() == 0) {
-                $deck = new DeckOfCards();
-                $deck->makeDeck();
-            }
-            $deck->shuffle();
-            $session->set("deck", $deck);
-            $cardsData = [];
-            foreach ($deck->getCards() as $card) {
-                $cardsData[] = $card->getAsString();
-            }
-            $deckData = [
-                'cards' => $cardsData,
-                'count' => $deck->cardCount()
-            ];
-            $response = new JsonResponse($deckData);
-            $response->setEncodingOptions(
-                $response->getEncodingOptions() | JSON_PRETTY_PRINT
-            );
-            return $response;
-        } else {
+        if (!$deck) {
             return new JsonResponse(['error' => 'Deck not found in session'], Response::HTTP_NOT_FOUND);
         }
+        if ($deck->cardCount() == 0) {
+            $deck = new DeckOfCards();
+            $deck->makeDeck();
+        }
+        $deck->shuffle();
+        $session->set("deck", $deck);
+        $cardsData = [];
+        foreach ($deck->getCards() as $card) {
+            $cardsData[] = $card->getAsString();
+        }
+        $deckData = [
+            'cards' => $cardsData,
+            'count' => $deck->cardCount()
+        ];
+        $response = new JsonResponse($deckData);
+        $response->setEncodingOptions(
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT
+        );
+        return $response;
     }
 
     #[Route("/api/deck/draw", name: "api_draw", methods: ['POST'])]
@@ -92,24 +90,22 @@ class JsonApiController extends AbstractController
         $this->initSession($session);
         $deck = $session->get("deck");
         $hand = $session->get("hand");
-        if ($deck && $hand) {
-            $card = $deck->drawCard();
-            $hand->addCard($card);
-            $session->set("deck", $deck);
-            $session->set("hand", $hand);
-            $data = [
-                "card" => $card->getAsString(),
-                "deckCardCount" => $deck->cardCount()
-            ];
-            $response = new JsonResponse($data);
-            $response->setEncodingOptions(
-                $response->getEncodingOptions() | JSON_PRETTY_PRINT
-            );
-            return $response;
-            ;
-        } else {
+        if (!$deck || !$hand) {
             return new JsonResponse(['error' => 'Deck or hand not found in session'], Response::HTTP_NOT_FOUND);
         }
+        $card = $deck->drawCard();
+        $hand->addCard($card);
+        $session->set("deck", $deck);
+        $session->set("hand", $hand);
+        $data = [
+            "card" => $card->getAsString(),
+            "deckCardCount" => $deck->cardCount()
+        ];
+        $response = new JsonResponse($data);
+        $response->setEncodingOptions(
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT
+        );
+        return $response;
     }
 
     #[Route("/api/deck/draw-form", name: "draw_x_form", methods: ['POST'])]
@@ -126,28 +122,26 @@ class JsonApiController extends AbstractController
         $this->initSession($session);
         $deck = $session->get("deck");
         $hand = $session->get("hand");
-        if ($deck && $hand) {
-            $drawnCards = [];
-            for ($i = 0; $i < $num; $i++) {
-                $card = $deck->drawCard();
-                if ($card) {
-                    $hand->addCard($card);
-                    $drawnCards[] = $card->getAsString();
-                } else {
-                    break;
-                }
-            }
-            $session->set("deck", $deck);
-            $session->set("hand", $hand);
-            $data = [
-                "cards" => $drawnCards,
-                "deckCardCount" => $deck->cardCount()
-            ];
-            $response = new JsonResponse($data);
-            $response->setEncodingOptions(JSON_PRETTY_PRINT);
-            return $response;
-        } else {
+        if (!$deck || !$hand) {
             return new JsonResponse(['error' => 'Deck or hand not found in session'], Response::HTTP_NOT_FOUND);
         }
+        $drawnCards = [];
+        for ($i = 0; $i < $num; $i++) {
+            $card = $deck->drawCard();
+            if (!$card) {
+                break;
+            }
+            $hand->addCard($card);
+            $drawnCards[] = $card->getAsString();
+        }
+        $session->set("deck", $deck);
+        $session->set("hand", $hand);
+        $data = [
+            "cards" => $drawnCards,
+            "deckCardCount" => $deck->cardCount()
+        ];
+        $response = new JsonResponse($data);
+        $response->setEncodingOptions(JSON_PRETTY_PRINT);
+        return $response;
     }
 }

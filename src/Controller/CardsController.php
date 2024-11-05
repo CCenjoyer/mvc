@@ -147,12 +147,12 @@ class CardsController extends AbstractController
             $allDrawnCards = [];
             for ($number = 0; $number < $num; $number++) {
                 $card = $deck->drawCard();
-                if ($card) {
-                    $hand->addCard($card);
-                    $allDrawnCards[] = $card;
-                } else {
+                if (!$card) {
                     break;
                 }
+                $hand->addCard($card);
+                $allDrawnCards[] = $card;
+
             }
             $cardCount = $deck->cardCount();
             $session->set("hand", $hand);

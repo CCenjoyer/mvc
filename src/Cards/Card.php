@@ -4,13 +4,13 @@ namespace App\Cards;
 
 class Card
 {
-    protected ?string $suit;
-    protected ?int $value;
+    protected string $suit;
+    protected int $value;
 
     public function __construct()
     {
-        $this->suit = null;
-        $this->value = null;
+        $this->suit = "";
+        $this->value = 0;
     }
 
 
@@ -24,12 +24,12 @@ class Card
         $this->suit = $suit;
     }
 
-    public function getValue(): ?int
+    public function getValue(): int
     {
         return $this->value;
     }
 
-    public function getSuit(): ?string
+    public function getSuit(): string
     {
         return $this->suit;
     }

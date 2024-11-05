@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
+use Exception;
 class DiceGameController extends AbstractController
 {
     #[Route("/game/pig", name: "pig_start")]

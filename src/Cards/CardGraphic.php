@@ -4,7 +4,7 @@ namespace App\Cards;
 
 class CardGraphic extends Card
 {
-    private $representation = [
+    private array $representation = [
         'diamond' => [
             1 => '🃁', 2 => '🃂', 3 => '🃃', 4 => '🃄', 5 => '🃅',
             6 => '🃆', 7 => '🃇', 8 => '🃈', 9 => '🃉', 10 => '🃊',
@@ -32,12 +32,12 @@ class CardGraphic extends Card
         parent::__construct();
     }
 
-    public function getAsCard()
+    public function getAsCard(): string
     {
         return $this->representation[$this->suit][$this->value];
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getAsCard();
     }
