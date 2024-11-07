@@ -33,10 +33,11 @@ class JsonApiController extends AbstractController
     public function deck(SessionInterface $session): Response
     {
         $this->initSession($session);
+        /** @var DeckOfCards $deck */
         $deck = $session->get("deck");
-        if (!$deck) {
-            return new JsonResponse(['error' => 'Deck not found in session'], Response::HTTP_NOT_FOUND);
-        }
+        // if (!$deck) {
+        //     return new JsonResponse(['error' => 'Deck not found in session'], Response::HTTP_NOT_FOUND);
+        // }
         $deckClone = clone $deck;
         $cardsData = [];
         $deckClone->sort();
@@ -58,11 +59,13 @@ class JsonApiController extends AbstractController
     public function shuffleDeck(SessionInterface $session): Response
     {
         $this->initSession($session);
+        /** @var DeckOfCards $deck */
         $deck = $session->get("deck");
 
-        if (!$deck) {
-            return new JsonResponse(['error' => 'Deck not found in session'], Response::HTTP_NOT_FOUND);
-        }
+        // if (!$deck) {
+        //     return new JsonResponse(['error' => 'Deck not found in session'], Response::HTTP_NOT_FOUND);
+        // }
+
         if ($deck->cardCount() == 0) {
             $deck = new DeckOfCards();
             $deck->makeDeck();
@@ -73,6 +76,7 @@ class JsonApiController extends AbstractController
         foreach ($deck->getCards() as $card) {
             $cardsData[] = $card->getAsString();
         }
+        /** @var DeckOfCards $deck */
         $deckData = [
             'cards' => $cardsData,
             'count' => $deck->cardCount()
@@ -88,11 +92,15 @@ class JsonApiController extends AbstractController
     public function draw(SessionInterface $session): Response
     {
         $this->initSession($session);
+        /** @var DeckOfCards $deck */
         $deck = $session->get("deck");
+        /** @var CardHand $hand */
         $hand = $session->get("hand");
-        if (!$deck || !$hand) {
-            return new JsonResponse(['error' => 'Deck or hand not found in session'], Response::HTTP_NOT_FOUND);
-        }
+
+        // if (!$deck || !$hand) {
+        //     return new JsonResponse(['error' => 'Deck or hand not found in session'], Response::HTTP_NOT_FOUND);
+        // }
+
         $card = $deck->drawCard();
         $hand->addCard($card);
         $session->set("deck", $deck);
@@ -120,17 +128,23 @@ class JsonApiController extends AbstractController
     public function drawX(int $num, SessionInterface $session): Response
     {
         $this->initSession($session);
+        /** @var DeckOfCards $deck */
         $deck = $session->get("deck");
+        /** @var CardHand $hand */
         $hand = $session->get("hand");
-        if (!$deck || !$hand) {
-            return new JsonResponse(['error' => 'Deck or hand not found in session'], Response::HTTP_NOT_FOUND);
-        }
+
+        // if (!$deck || !$hand) {
+        //     return new JsonResponse(['error' => 'Deck or hand not found in session'], Response::HTTP_NOT_FOUND);
+        // }
+
         $drawnCards = [];
         for ($i = 0; $i < $num; $i++) {
-            $card = $deck->drawCard();
-            if (!$card) {
+            try {
+                $card = $deck->drawCard();
+            } catch (\Exception) {
                 break;
             }
+            
             $hand->addCard($card);
             $drawnCards[] = $card->getAsString();
         }

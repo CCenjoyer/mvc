@@ -13,6 +13,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
+use Exception;
+
 class CardsController extends AbstractController
 {
     private function initSession(
@@ -67,6 +69,7 @@ class CardsController extends AbstractController
         SessionInterface $session
     ): Response {
         $this->initSession($session);
+        /** @var CardHand $hand */
         $hand = $session->get("hand");
         $cards = $hand->getCards();
         $data = [
@@ -81,6 +84,7 @@ class CardsController extends AbstractController
         SessionInterface $session
     ): Response {
         $this->initSession($session);
+        /** @var DeckOfCards $deck */
         $deck = $session->get("deck");
         $sortedDeck = clone $deck;
         $sortedDeck->sort();
@@ -97,6 +101,7 @@ class CardsController extends AbstractController
         SessionInterface $session
     ): Response {
         $this->initSession($session);
+        /** @var DeckOfCards $deck */
         $deck = $session->get("deck");
         $deck->shuffle();
         $cards = $deck->getCards();
@@ -111,7 +116,9 @@ class CardsController extends AbstractController
         SessionInterface $session
     ): Response {
         $this->initSession($session);
+        /** @var DeckOfCards $deck */
         $deck = $session->get("deck");
+        /** @var CardHand $hand */
         $hand = $session->get("hand");
         if ($deck->getCards() != []) {
             $card = $deck->drawCard();
@@ -138,21 +145,24 @@ class CardsController extends AbstractController
         SessionInterface $session
     ): Response {
         $this->initSession($session);
+        /** @var DeckOfCards $deck */
         $deck = $session->get("deck");
+        /** @var CardHand $hand */
         $hand = $session->get("hand");
+
         if ($deck->getCards() != []) {
             if ($num > $deck->cardCount()) {
                 $num = $deck->cardCount();
             }
             $allDrawnCards = [];
-            for ($number = 0; $number < $num; $number++) {
-                $card = $deck->drawCard();
-                if (!$card) {
-                    break;
+            try {
+                for ($number = 0; $number < $num; $number++) {
+                    $card = $deck->drawCard();
+                    $hand->addCard($card);
+                    $allDrawnCards[] = $card;
                 }
-                $hand->addCard($card);
-                $allDrawnCards[] = $card;
-
+            } catch (Exception $e) {
+                $this->addFlash('notice', 'Out of Cards!');
             }
             $cardCount = $deck->cardCount();
             $session->set("hand", $hand);
