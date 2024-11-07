@@ -2,40 +2,96 @@
 
 namespace App\Controller;
 
-use App\Cards\Card;
-use App\Cards\CardGraphic;
-use App\Cards\CardHand;
-use App\Cards\DeckOfCards;
-
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Cards\GameTwentyOne;
 
 class GameTwentyOneController extends AbstractController
 {
-    private function initSession(SessionInterface $session): void {
-        if (!$session->has("hand")) {
-            $session->set("hand", new CardHand());
-        }
-        if (!$session->has("deck")) {
-            $deck = new DeckOfCards();
-            $deck->makeDeck();
-            $session->set("deck", $deck);
-        }
-    }
-
-    #[Route("/game", name: "game")]
-    public function showSession(
-        SessionInterface $session
-    ): Response {
+    #[Route("/game/doc", name: "game_docs")]
+    public function init(SessionInterface $session): Response
+    {
         $this->initSession($session);
 
+        $this->addFlash(
+            'success',
+            'Game initialized'
+        );
+
+        return $this->render('twenty_one/game_docs.html.twig');
+    }
+
+    #[Route("/game", name: "game_information")]
+    public function gameInfo(SessionInterface $session): Response
+    {
+        $this->initSession($session);
+        return $this->render('twenty_one/game_info.html.twig');
+    }
+
+    #[Route("/game/reset", name: "game_reset")]
+    public function reset(SessionInterface $session): Response
+    {
+        $this->initSession($session);
+        return $this->redirectToRoute('game');
+    }
+
+    #[Route("/game/play", name: "game")]
+    public function index(SessionInterface $session): Response
+    {
+        if (!$session->has('game')) {
+            $session->set('game', new GameTwentyOne());
+        }
+
+        /** @var GameTwentyOne $game */
+        $game = $session->get('game');
+
         $data = [
-            'session' => $session->all()
+            'playerHand' => $game->getPlayerHand(),
+            'playerScore' => $game->getPlayerScore(),
+            'dealerHand' => $game->getDealerHand(),
+            'dealerScore' => $game->getDealerScore(),
+            'deckCount' => $game->getDeckCount(),
+            'isGameOver' => $game->isGameOver(),
+            'winner' => $game->isGameOver() ? $game->determineWinner() : null,
         ];
 
-        return $this->render('session.html.twig', $data);
+        return $this->render('/twenty_one/game.html.twig', $data);
+    }
+
+    #[Route("/game/hit", name: "twenty_one_hit")]
+    public function draw(SessionInterface $session): Response
+    {
+        /** @var GameTwentyOne $game */
+        $game = $session->get('game');
+        $game->drawPlayerCard();
+        $session->set('game', $game);
+
+        if ($game->isGameOver()) {
+            $game->drawDealerCard();
+            $session->set('game', $game);
+        }
+
+        return $this->redirectToRoute('game');
+    }
+
+    #[Route("/game/stand", name: "twenty_one_stand")]
+    public function stand(SessionInterface $session): Response
+    {
+        /** @var GameTwentyOne $game */
+        $game = $session->get('game');
+        $game->drawDealerCard();
+        $session->set('game', $game);
+
+        return $this->redirectToRoute('game');
+    }
+
+    private function initSession(SessionInterface $session): void
+    {
+        $game = new GameTwentyOne();
+        $game->drawDealerCard();
+        $game->drawDealerCard();
+        $session->set('game', $game);
     }
 }
