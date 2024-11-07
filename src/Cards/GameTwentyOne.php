@@ -93,7 +93,7 @@ class GameTwentyOne
 
     public function isGameOver(): bool
     {
-        return $this->playerScore >= 21 || $this->dealerScore >= 21;
+        return $this->playerScore >= 21 || $this->dealerScore >= 17;
     }
 
     public function determineWinner(): string
