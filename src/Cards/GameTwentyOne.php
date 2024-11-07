@@ -45,24 +45,23 @@ class GameTwentyOne
     {
         $score = 0;
         $aces = 0;
-
         foreach ($hand->getCards() as $card) {
             $value = $card->getValue();
             if ($value >= 11 && $value <= 13) {
                 $score += 10;
-            } elseif ($value == 14) {
+                continue;
+            }
+            if ($value == 14) {
                 $aces++;
                 $score += 11;
-            } else {
-                $score += $value;
+                continue;
             }
+            $score += $value;
         }
-
         while ($score > 21 && $aces > 0) {
             $score -= 10;
             $aces--;
         }
-
         return $score;
     }
 
@@ -76,11 +75,17 @@ class GameTwentyOne
         return $this->dealerScore;
     }
 
+    /**
+     * @return Card[]
+     */
     public function getPlayerHand(): array
     {
         return $this->playerHand->getCards();
     }
 
+    /**
+     * @return Card[]
+     */
     public function getDealerHand(): array
     {
         return $this->dealerHand->getCards();
@@ -106,8 +111,7 @@ class GameTwentyOne
             return 'Player wins!';
         } elseif ($this->dealerScore > $this->playerScore) {
             return 'Dealer wins!';
-        } else {
-            return "Dealer wins!";
         }
+        return "Dealer wins!";
     }
 }

@@ -161,11 +161,11 @@ class JsonApiController extends AbstractController
     }
 
     #[Route("/api/game", name: "api_twenty_one", methods: ['GET'])]
-    public function twenty_one(SessionInterface $session): Response
+    public function twentyOne(SessionInterface $session): Response
     {
         /** @var GameTwentyOne $game */
         $game = $session->get("game");
-        if (!$game) {
+        if (!$game instanceof GameTwentyOne) {
             $game = new GameTwentyOne();
             $session->set("game", $game);
         }
