@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+
+{% block title %}TwentyOne{% endblock %}
+
+{% block body %}
+    <h1>Twenty One Information</h1>
+    We don’t bet – it is just all about the numbers!
+    Aim of the 21 Card Game is to get 21 or as close to as possible.
+    Number cards have their face value, jacks, kings and queens are worth 10.
+    Ace can be either 1 or 11.
+    The dealer and all other players have two cards.
+    With the exception of the dealer the players have their cards face up.
+    The dealer has one card up and one card face down.
+    The dealer goes to each player one at a time.
+    The player needs to decide if they want another card (hit) or will sit on what they have.
+    You can have as many cards as you like as long as you don’t go over 21.
+    Players are not competing against each other, but against the dealer.
+    If the dealer has 16 or under then they must take another card.
+    If the dealer has 21 (Ace and a ten value card) the dealer wins.
+    If the dealer goes bust then everyone else wins.
+    The deck gets reshuffled after every game.
+
+    <br><br>
+    <button class="green-button full-width-button" onclick="window.location.href='{{ path('game') }}'">Play Twenty One</button>
+    <button class="blue-button" onclick="window.location.href='{{ path('game_docs') }}'">Docs</button>
+{% endblock %}

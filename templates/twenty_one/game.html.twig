@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Twenty-One Game{% endblock %}
+
+{% block body %}
+    <h1>Twenty-One Game</h1>
+    {{ include('flash.html.twig') }}
+    <h2>My hand:</h2>
+    {% for card in playerHand %}
+        <span class="card">{{ card.getAsCard() }}</span>
+    {% endfor %}
+    <p>Player Score: {{ playerScore }}</p>
+
+    <h2>Dealer's hand:</h2>
+    {% for card in dealerHand %}
+        <span class="card">{{ card.getAsCard() }}</span>
+    {% endfor %}
+    <p>Dealer Score: {{ dealerScore }}</p>
+    <p>Cards Left in Deck: {{ deckCount }}</p>
+    {% if isGameOver %}
+        <p>{{ winner }}</p>
+        <button class="green-button full-width-button" onclick="window.location.href='{{ path('game_reset') }}'">Play Again</button>
+    {% else %}
+        <button class="green-button full-width-button" onclick="window.location.href='{{ path('twenty_one_hit') }}'">Hit</button>
+        <button class="red-button full-width-button" onclick="window.location.href='{{ path('twenty_one_stand') }}'">Stand</button>
+    {% endif %}
+    <button class="blue-button" onclick="window.location.href='{{ path('game_reset') }}'">Reset</button>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html.twig" %}
+
+{% block title %}TwentyOne Docs{% endblock %}
+
+{% block body %}
+    <h1>Twenty One Docs</h1>
+
+        <p>Documentation and uml for Twenty One game.</p>
+
+                <br>
+                <img src="{{ asset('build/images/cardsclasses.png') }}" id="card-uml" alt="">
+                
+                <br><br>
+                <h2>Card Classes <button onclick="window.location.href='{{ path('card_docs') }}'">View Card Docs</button></h2>
+                <h3>Card</h3>
+                <p>Card is a very basic class. It has two attributes, suit and value. These attributes determine what specific card it is. If it
+                has the suit of <em>"diamond"</em> and value of <em>11</em> its a diamond jack. Most of the methods contained within the class just play around with and use 
+                these two attributes.</p>
+
+                <h3>CardGraphic</h3>
+                <p>CardGraphic inherits the class <em>Card</em> and can therefore use the same methods and attributes as an Object of the Card class can.
+                    The point of this class is to give the user a utf-8 card symbol to represent the card contained within the regular card-attributes.
+                </p>
+
+                <h3>CardHand</h3>
+                <p>
+                CardHand can be simply be viewed as a list that can contain some Card object within it. It has two very basic methods for the moment, one to add a Card object to the hand
+                and one to return a list of all the Card objects contained within the hand. 
+                </p>
+
+
+                <h3>DeckOfCards</h3>
+                <p>
+                In the same way as CardHand, DeckOfCards is really just a list made to contain Card objects, along with, of course, helpful methods. Such as creation of a brand new deck,
+                drawing cards, shuffling and sorting the deck.
+                </p>
+{% endblock %}
