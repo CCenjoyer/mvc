@@ -5,14 +5,14 @@
 {% block body %}
     <h1>API</h1>
 
-    <h2>Quote</h2>
+    <h2>Quote</h2><br>
     <form method="post" action="{{ path('quote') }}">
         <button type="submit">Get Quote</button>
     </form>
 
 
     <br>
-    <h2>Deck</h2>
+    <h2>Deck</h2><br>
     <form method="post" action="{{ path('api_deck') }}">
         <button type="submit">Get Deck</button>
     </form>
@@ -30,4 +30,8 @@
         <input type="number" id="num" name="num" min="1" required>
         <button type="submit">Draw</button>
     </form>
+    <br>
+
+    <h2>Twenty-One Game</h2><br>
+    <button onclick="window.location.href='{{ path('api_twenty_one') }}'">Check 21 Game status</button>
 {% endblock %}
