@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 use App\Cards\CardHand;
 use App\Cards\DeckOfCards;
+use App\Cards\GameTwentyOne;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class JsonApiController extends AbstractController
@@ -153,6 +154,33 @@ class JsonApiController extends AbstractController
         $data = [
             "cards" => $drawnCards,
             "deckCardCount" => $deck->cardCount()
+        ];
+        $response = new JsonResponse($data);
+        $response->setEncodingOptions(JSON_PRETTY_PRINT);
+        return $response;
+    }
+
+    #[Route("/api/game", name: "api_twenty_one", methods: ['GET'])]
+    public function twenty_one(SessionInterface $session): Response
+    {
+        /** @var GameTwentyOne $game */
+        $game = $session->get("game");
+        if (!$game) {
+            $game = new GameTwentyOne();
+            $session->set("game", $game);
+        }
+
+        $playerHand = array_map(fn($card) => $card->getAsString(), $game->getPlayerHand());
+        $dealerHand = array_map(fn($card) => $card->getAsString(), $game->getDealerHand());
+
+        $data = [
+            "playerscore" => $game->getPlayerScore(),
+            "playerhand" => $playerHand,
+            "dealerscore" => $game->getDealerScore(),
+            "dealerhand" => $dealerHand,
+            "deckcount" => $game->getDeckCount(),
+            "isgameover" => $game->isGameOver(),
+            "winner" => $game->determineWinner(),
         ];
         $response = new JsonResponse($data);
         $response->setEncodingOptions(JSON_PRETTY_PRINT);
