@@ -11,15 +11,8 @@ use App\Cards\GameTwentyOne;
 class GameTwentyOneController extends AbstractController
 {
     #[Route("/game/doc", name: "game_docs")]
-    public function init(SessionInterface $session): Response
+    public function init(): Response
     {
-        $this->initSession($session);
-
-        $this->addFlash(
-            'success',
-            'Game initialized'
-        );
-
         return $this->render('twenty_one/game_docs.html.twig');
     }
 
@@ -68,11 +61,6 @@ class GameTwentyOneController extends AbstractController
         $game->drawPlayerCard();
         $session->set('game', $game);
 
-        if ($game->isGameOver()) {
-            $game->drawDealerCard();
-            $session->set('game', $game);
-        }
-
         return $this->redirectToRoute('game');
     }
 
@@ -81,7 +69,9 @@ class GameTwentyOneController extends AbstractController
     {
         /** @var GameTwentyOne $game */
         $game = $session->get('game');
-        $game->drawDealerCard();
+        while ($game->getDealerScore() < 17) {
+            $game->drawDealerCard();
+        }
         $session->set('game', $game);
 
         return $this->redirectToRoute('game');
@@ -90,8 +80,6 @@ class GameTwentyOneController extends AbstractController
     private function initSession(SessionInterface $session): void
     {
         $game = new GameTwentyOne();
-        $game->drawDealerCard();
-        $game->drawDealerCard();
         $session->set('game', $game);
     }
 }
