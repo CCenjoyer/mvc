@@ -16,9 +16,8 @@
         <span class="card">{{ card.getAsCard() }}</span>
     {% endfor %}
     <p>Dealer Score: {{ dealerScore }}</p>
-    <p>Cards Left in Deck: {{ deckCount }}</p>
     {% if isGameOver %}
-        <p>{{ winner }}</p>
+        <h1>{{ winner }}</h1>
         <button class="green-button full-width-button" onclick="window.location.href='{{ path('game_reset') }}'">Play Again</button>
     {% else %}
         <button class="green-button full-width-button" onclick="window.location.href='{{ path('twenty_one_hit') }}'">Hit</button>
