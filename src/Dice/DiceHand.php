@@ -3,6 +3,7 @@
 namespace App\Dice;
 
 use App\Dice\Dice;
+
 /**
  * Class DiceHand
  * @package App\Dice
