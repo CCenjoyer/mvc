@@ -145,7 +145,7 @@ class JsonApiController extends AbstractController
             } catch (\Exception) {
                 break;
             }
-            
+
             $hand->addCard($card);
             $drawnCards[] = $card->getAsString();
         }
@@ -170,8 +170,8 @@ class JsonApiController extends AbstractController
             $session->set("game", $game);
         }
 
-        $playerHand = array_map(fn($card) => $card->getAsString(), $game->getPlayerHand());
-        $dealerHand = array_map(fn($card) => $card->getAsString(), $game->getDealerHand());
+        $playerHand = array_map(fn ($card) => $card->getAsString(), $game->getPlayerHand());
+        $dealerHand = array_map(fn ($card) => $card->getAsString(), $game->getDealerHand());
 
         $data = [
             "playerscore" => $game->getPlayerScore(),

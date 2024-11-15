@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 use Exception;
+
 class DiceGameController extends AbstractController
 {
     #[Route("/game/pig", name: "pig_start")]
@@ -184,5 +185,4 @@ class DiceGameController extends AbstractController
 
         return $this->redirectToRoute('pig_play');
     }
-
 }

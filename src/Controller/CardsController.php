@@ -193,6 +193,4 @@ class CardsController extends AbstractController
     {
         return $this->render('cards/carddoc.html.twig');
     }
-
-
 }
