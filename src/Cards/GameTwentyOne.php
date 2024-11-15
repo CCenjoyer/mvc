@@ -49,7 +49,7 @@ class GameTwentyOne
         $this->dealerHand->addCard($card);
         $this->updateScores();
     }
-    
+
     /**
      * Draw two cards for the player
      * @return void
