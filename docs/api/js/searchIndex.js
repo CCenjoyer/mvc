@@ -153,67 +153,67 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Cards\\GameTwentyOne",
             "name": "GameTwentyOne",
-            "summary": "",
+            "summary": "Class\u0020GameTwentyOne\nClass\u0020to\u0020handle\u0020the\u0020game\u0020of\u0020Twenty\u002DOne\u0020\u0028Blackjack\u0029",
             "url": "classes/App-Cards-GameTwentyOne.html"
         },                {
             "fqsen": "\\App\\Cards\\GameTwentyOne\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "",
+            "summary": "Constructor\u0020to\u0020create\u0020a\u0020new\u0020game\u0020of\u0020Twenty\u002DOne",
             "url": "classes/App-Cards-GameTwentyOne.html#method___construct"
         },                {
             "fqsen": "\\App\\Cards\\GameTwentyOne\u003A\u003AdrawPlayerCard\u0028\u0029",
             "name": "drawPlayerCard",
-            "summary": "",
+            "summary": "Draw\u0020a\u0020card\u0020for\u0020the\u0020player",
             "url": "classes/App-Cards-GameTwentyOne.html#method_drawPlayerCard"
         },                {
             "fqsen": "\\App\\Cards\\GameTwentyOne\u003A\u003AdrawDealerCard\u0028\u0029",
             "name": "drawDealerCard",
-            "summary": "",
+            "summary": "Draw\u0020a\u0020card\u0020for\u0020the\u0020dealer",
             "url": "classes/App-Cards-GameTwentyOne.html#method_drawDealerCard"
         },                {
             "fqsen": "\\App\\Cards\\GameTwentyOne\u003A\u003AupdateScores\u0028\u0029",
             "name": "updateScores",
-            "summary": "",
+            "summary": "Draw\u0020two\u0020cards\u0020for\u0020the\u0020player",
             "url": "classes/App-Cards-GameTwentyOne.html#method_updateScores"
         },                {
             "fqsen": "\\App\\Cards\\GameTwentyOne\u003A\u003AcalculateScore\u0028\u0029",
             "name": "calculateScore",
-            "summary": "",
+            "summary": "Calculate\u0020the\u0020score\u0020of\u0020a\u0020hand",
             "url": "classes/App-Cards-GameTwentyOne.html#method_calculateScore"
         },                {
             "fqsen": "\\App\\Cards\\GameTwentyOne\u003A\u003AgetPlayerScore\u0028\u0029",
             "name": "getPlayerScore",
-            "summary": "",
+            "summary": "Get\u0020the\u0020score\u0020of\u0020the\u0020player",
             "url": "classes/App-Cards-GameTwentyOne.html#method_getPlayerScore"
         },                {
             "fqsen": "\\App\\Cards\\GameTwentyOne\u003A\u003AgetDealerScore\u0028\u0029",
             "name": "getDealerScore",
-            "summary": "",
+            "summary": "Get\u0020the\u0020score\u0020of\u0020the\u0020dealer",
             "url": "classes/App-Cards-GameTwentyOne.html#method_getDealerScore"
         },                {
             "fqsen": "\\App\\Cards\\GameTwentyOne\u003A\u003AgetPlayerHand\u0028\u0029",
             "name": "getPlayerHand",
-            "summary": "",
+            "summary": "Get\u0020the\u0020player\u0027s\u0020hand",
             "url": "classes/App-Cards-GameTwentyOne.html#method_getPlayerHand"
         },                {
             "fqsen": "\\App\\Cards\\GameTwentyOne\u003A\u003AgetDealerHand\u0028\u0029",
             "name": "getDealerHand",
-            "summary": "",
+            "summary": "Get\u0020the\u0020dealer\u0027s\u0020hand",
             "url": "classes/App-Cards-GameTwentyOne.html#method_getDealerHand"
         },                {
             "fqsen": "\\App\\Cards\\GameTwentyOne\u003A\u003AgetDeckCount\u0028\u0029",
             "name": "getDeckCount",
-            "summary": "",
+            "summary": "Get\u0020the\u0020number\u0020of\u0020cards\u0020left\u0020in\u0020the\u0020deck",
             "url": "classes/App-Cards-GameTwentyOne.html#method_getDeckCount"
         },                {
             "fqsen": "\\App\\Cards\\GameTwentyOne\u003A\u003AisGameOver\u0028\u0029",
             "name": "isGameOver",
-            "summary": "",
+            "summary": "Check\u0020if\u0020the\u0020game\u0020is\u0020over",
             "url": "classes/App-Cards-GameTwentyOne.html#method_isGameOver"
         },                {
             "fqsen": "\\App\\Cards\\GameTwentyOne\u003A\u003AdetermineWinner\u0028\u0029",
             "name": "determineWinner",
-            "summary": "",
+            "summary": "Determine\u0020the\u0020winner\u0020of\u0020the\u0020game",
             "url": "classes/App-Cards-GameTwentyOne.html#method_determineWinner"
         },                {
             "fqsen": "\\App\\Cards\\GameTwentyOne\u003A\u003A\u0024deck",
