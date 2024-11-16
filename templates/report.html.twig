@@ -103,9 +103,113 @@
         </p>
     </div>
 
-    <h2 id="kmom03">Kmom03</h2>
-    <h2 id="kmom04">Kmom04</h2>
-    <h2 id="kmom05">Kmom05</h2>
+    <div class="kmomcontent">
+        <h2 id="kmom03">Kmom03</h2>
+        <h3 class="kmomtextheader">Berätta hur det kändes att modellera ett kortspel med flödesdiagram och psuedokod. Var det något som du tror stödjer dig i din problemlösning och tankearbete för att strukturera koden kring en applikation?</h3>
+        <p>
+            Helt ärligt så föredrar jag att inte använda mig av diagram, i fall som dessa där det man ska utveckla är relativt simpelt. Jag tycker att det är lättare att bara skriva ner vad jag ska göra, förstå det, och sedan bara göra det. 
+            Jag brukar redan spendare en ganska lång tid att tänka på hur jag ska strukturera koden innan jag börjar skriva något. Men jag känner dock att värdet av att få igång den här processen av flödesdiagram och god planering
+            kan vara väldigt hjälpsamt under längre projekt och utvecklingsprocesser där om man bara beger sig in kan sluta upp i förvirring och inneffektiv utveckling.
+        </p>
+
+        <h3 class="kmomtextheader">Berätta om din implementation från uppgiften. Hur löste du uppgiften, är du nöjd/missnöjd, vilken förbättringspotential ser du i din koden, dina klasser och applikationen som helhet?</h3>
+        <p>
+            Jag tyckte om strukturen jag fick till i controllern och kände också att jag lyckades hålla routes:en inom controllern ganska simpla. Det enda dem riktigt använts för är att hantera spelklassen och rendera templates.
+            Förutom i ett fall då man <em>standat</em> i spelet, då det finns logik inom routen för att dra kort för dealern tills den har 17 eller mer. Spelklassen GameTwentyOne är också ganska simpel, i alla fall mer
+            simepl än vad jag först föväntade mig när jag började titta på kmom:et.
+            
+            <br><br>
+            Jag är nöjd med hur spelet fungerar och hur det ser ut, fast kände att strukturen jag först fått till inom kort-klasserna kanske
+            hade kunnat hanterats bättre, kände att det var lite onödigt t.ex. att korten direkt har värden kopplade till sig då det är reglerna som bestämmer vad korten är värda och kan därför fattas
+            inom spelklassen istället. Det gick ju såklart att lösa det på det sättet jag gjorde i spelet, där jag bara ändrade värden på korten som krävde det, men känner att det kanske kan finnas en bättre lösning
+            och struktur man kan använda sig av.
+        </p>
+
+        <h3 class="kmomtextheader">Vilken är din känsla för att koda i ett ramverk som Symfony, så här långt in i kursen?</h3>
+        <p>
+            I början av kursen kändes allt väldigt nytt och jag var lite överväldigad av allt nytt som finns inom applikationen, det känns fortfarande som det finns mycket inom filerna som jag inte är helt hundra på vad det
+            gör, men håller mig till det jag vet och försöker att inte göra något för komplicerat. Men det känns också som att jag nu lärt mig nog av php och att arbeta inom symphony för att kunna utveckla applikationer
+            utan större problem.
+        </p>
+
+        <h3 class="kmomtextheader">Vilken är din TIL för detta kmom?</h3>
+        <p>
+            I detta kmom har jag skapat en spelklass som beror på tidigare skapade klasser och använder dessa klasser för att skapa ett spel. Jag har arbetat med en controller som hanterar routes och
+            utför metoder på spelklassen beroende på spelarens beslut i spelet. Därmed har jag skapat templates som förklarar, dokumenterar samt renderar spelet och visar upp det för användaren.
+            Implementerat linters och lekt runt med olika grader på dem för att hålla koden ren och snygg.
+        </p>
+        <br><br>   
+    </div>
+
+    <div class="kmomcontent">
+        <h2 id="kmom04">Kmom04</h2>
+        <h3 class="kmomtextheader"> Berätta hur du upplevde att skriva kod som testar annan kod med PHPUnit och hur du upplever phpunit rent allmänt.</h3>
+        <p class="kmom-text">
+            Har skrivit tester inom tidigare kurser och tycker att det är en bra metod att använda sig av för att säkerställa att koden fungerar som den ska.
+            Jag tycker att phpunit är ett bra verktyg för att skriva tester och att köra dessa tester och fungerar till stor del likadant som i tidigare kurser med hur man
+            sätter upp testerna och kör asserts, så kändes därför ganska bekant att implementera.
+        </p>
+
+        <h3 class="kmomtextheader">Hur väl lyckades du med kodtäckningen av din kod, lyckades du nå mer än 90% kodtäckning?</h3>
+        <p class="kmom-text">
+            För klasserna samt metoder som jag skrev tester för så lyckades jag med att nå över 90% kodtäckning, klasserna jag skrev tester för är alla kort klasser samt 21 spelet, samt dice klasserna som
+            jag har för mig var exempel från ett tidigare kmom, men jag skrev tester för dem också.
+            Dock så skrev jag inte tester för controllers eller routes,
+            då jag inte riktigt visste hur jag skulle göra det / det var inget hårt krav. Lade också till länkar till test coverage och dokumentation i navigationsbaren.
+        </p>
+
+        <h3 class="kmomtextheader">Upplever du din egen kod som “testbar kod” eller finns det delar i koden som är mer eller mindre testbar och finns det saker som kan göras för att förbättra kodens testbarhet?</h3>
+        <p class="kmom-text">
+            Det mesta av koden som jag skrev tester för var ganska lätt att skriva tester för, då jag hade skrivit klasserna och metoderna för det mesta på ett ganska simpelt sätt.
+            Dock när det kommer till klasser som har slumpmässiga värden så skulle det varit enklare att ha haft en metod som pålitligt kan ge resurser.
+            // T.ex. för testa att ace:s värde kan vara 1 eller 11 i spelet 21
+            hade varit enklare att testa om jag gjort en method för att direkt ge en spelare ett specifikt kort för att enklare testa hur värden testas i spelet. // Altså
+            metoder som inte riktigt hade varit användningsbara i själva spelet fast hade varit användbara för att skriva tester.
+        </p>
+
+        <h3 class="kmomtextheader">Valde du att skriva om delar av din kod för att förbättra den eller göra den mer testbar, om så berätta lite hur du tänkte.</h3>
+        <p class="kmom-text">
+            Jag ändrade inte på någon kod för att göra den mer testbar, då jag tyckte att det mesta av koden var ganska lätt att skriva tester för, med vissa undantag.
+            Jag kom dock att tänka på hur jag hade skrivit om vissa klasser om jag hade gjort om dem. Detta var något som jag kände i kmom03 också. Det finns ingen direkt anledning för
+            t.ex. ett kort ska ha ett värde direkt kopplat till sig själv i själva klassen, då spel och regler ändrar värdet av specifika kort och borde därför hanteras direkt där.
+            Men det system jag har just nu fungerar bra nog. 
+        </p>
+
+        <h3 class="kmomtextheader">Fundera över om du anser att testbar kod är något som kan identifiera “snygg och ren kod”.</h3>
+        <p class="kmom-text">
+            Klasser och metoder som är ganska lätta att skriva tester för är oftast också ganska lätta att läsa och förstå.
+            Därav så kan mer komplexa klasser och metoder vara svårare att skriva tester för, vilket då kan vara en indikation av <em>ful kod</em>.
+        </p>
+
+        <h3 class="kmomtextheader">Vilken är din TIL för detta kmom?</h3>
+        <p class="kmom-text">
+            I detta kmom har jag lärt mig att skriva tester för min kod och att använda mig av phpunit för att köra dessa tester.
+            Jag har också lärt mig att använda mig av linters för att hålla koden ren och snygg samt att dokumentera klasser och metoder med PHP Dock Block inom GameTwentyOne klassen.
+        </p>
+        <br><br>
+    </div>
+
+    <div class="kmomcontent">
+        <h2 id="kmom05">Kmom05</h2>
+        <h3 class="kmomtextheader"></h3>
+        <p class="kmom-text">
+
+        </p>
+
+        <h3 class="kmomtextheader"></h3>
+        <p class="kmom-text">
+
+        </p>
+
+        <h3 class="kmomtextheader"></h3>
+        <p class="kmom-text">
+
+        </p>
+    </div>
+    
+
+
+
     <h2 id="kmom06">Kmom06</h2>
     <h2 id="kmom07">Kmom07-Kmom10</h2>
 {% endblock %}
