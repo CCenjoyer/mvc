@@ -191,19 +191,54 @@
 
     <div class="kmomcontent">
         <h2 id="kmom05">Kmom05</h2>
-        <h3 class="kmomtextheader"></h3>
+        <h3 class="kmomtextheader">Gick det bra att jobba igenom övningen med Symfony och Doctrine? Något särskilt du tänkte/reagerade på under övningen?</h3>
         <p class="kmom-text">
-
+            Det gick ganska bra. Det är ju såklart ett helt nytt sätt att skapa och hantera databaser, men det kändes inte speciellt komplicerat, vilket jag antar är meningen med det. 
+            Jag har tidigare jobbat mer direkt med SQL och manuellt definierade databasstrukturer, så att använda ett ramverk som Symfony och ett ORM som Doctrine var en helt ny upplevelse för mig.
+            Jag är inte helt säker på hur enkelt det skulle vara att koppla ihop flera tabeller och skapa relationer mellan dem med Doctrine.
+            Jag kan tänka mig att det kan vara lite mer komplicerat än det jag gjort hittills, men jag tycker att det fortfarande verkar vara mer
+            effektivt och lättillgängligt än att bygga sådana relationer från grunden.
         </p>
 
-        <h3 class="kmomtextheader"></h3>
+        <h3 class="kmomtextheader">Berätta om din applikation och hur du tänkte när du byggde upp den. Tänkte du något speciellt på användargränssnittet?</h3>
         <p class="kmom-text">
-
+            När jag först skapade biblioteket tänkte jag att det skulle fungera som en komplett applikation med sin egen navbar och flera sidor för att hantera böcker.
+            Jag ville göra gränssnittet användarvänligt och intuitivt för att ge en bra upplevelse för användaren.
+            Applikationen fick därför bara två flikar i navbaren: en för att visa alla böcker och en för att lägga till nya böcker.
+        </p>
+        <p class="kmom-text">
+            Jag ville hålla gränssnittet ren och enkel för att fokusera på funktionaliteten snarare än en mer komplex design.
+            För att ge användaren en bättre upplevelse när de interagerade med boken, lade jag till funktioner för att hantera en specifik bok — när användaren klickade på en bok,
+            kunde de ta bort eller ändra informationen om boken. Jag lade också till flash-meddelanden som informerade användaren när en operation lyckats,
+            vilket ser till att användaren vet att deras handlingar har registrerats.
         </p>
 
-        <h3 class="kmomtextheader"></h3>
+        <h3 class="kmomtextheader">Gick det bra att jobba med ORM i CRUD eller vad anser du om det? Jämför gärna med andra sätt att jobba med databaser.</h3>
         <p class="kmom-text">
+            Det gick bra. Jag måste säga att jag inte riktigt kände att jag skapade min egen databas och arbetade mot den med mina egna funktioner.
+            Med Doctrine kändes det mer som att jag definierade tabeller och relationer i kod, och sedan skapades själva databasen automatiskt åt mig.
+            Doctrine tog hand om all hantering av databasen, vilket sparade mycket tid och energi, och det var väldigt smidigt att använda sig av.
+        </p>
+        <p class="kmom-text">
+            Om jag hade byggt en databas manuellt hade jag behövt skriva en hel del SQL för att skapa tabellerna, definiera relationer och hantera de olika CRUD-operationerna.
+            Doctrine å andra sidan gör allt det åt mig och jag kan fokusera mer på logiken i applikationen.
+            Jag har inte tidigare arbetat med ett ORM-verktyg på det här sättet, så det var en intressant upplevelse få ett typ av interface för databasinteraktionen.
+        </p>
 
+        <h3 class="kmomtextheader">Vad är din uppfattning om ORM så här långt och relatera gärna till andra sätt att jobba med applikationskod mot databaser?</h3>
+        <p class="kmom-text">
+            Jag tycker att ORM är en mycket bra metod att använda sig av. Det känns som att det sparar mycket tid och energi,
+            eftersom man slipper skriva egna funktioner eller SQL för att hantera databasen.
+            Om jag hade byggt databasen från grunden hade jag behövt spendera mycket mer tid på att skapa och skriva funktioner för att hantera den,
+            vilket jag tror skulle vara mycket mer tidskrävande och komplicerat.
+            Doctrine och ORM verktyg generellt gör det möjligt att ta bort komplexiteten och koncentrera sig på applikationens logik istället.
+        </p>
+
+        <h3 class="kmomtextheader">Vilken är din TIL för detta kmom?</h3>
+        <p class="kmom-text">
+            I detta kmom har jag lärt mig att bygga och hantera en databas med hjälp av Doctrine.
+            Jag har fått en bättre förståelse för hur ORM fungerar och hur det kan användas för att förenkla hanteringen av databaser i en applikation.
+            Jag har också insett vikten av att använda ramverk och verktyg som Symfony och Doctrine för att göra utvecklingen mer effektiv och överskådlig.
         </p>
     </div>
     
