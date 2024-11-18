@@ -9,6 +9,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+use App\Entity\Library;
+use App\Repository\LibraryRepository;
+use Doctrine\Persistence\ManagerRegistry;
 
 use App\Cards\CardHand;
 use App\Cards\DeckOfCards;
@@ -134,10 +137,6 @@ class JsonApiController extends AbstractController
         /** @var CardHand $hand */
         $hand = $session->get("hand");
 
-        // if (!$deck || !$hand) {
-        //     return new JsonResponse(['error' => 'Deck or hand not found in session'], Response::HTTP_NOT_FOUND);
-        // }
-
         $drawnCards = [];
         for ($i = 0; $i < $num; $i++) {
             try {
@@ -185,5 +184,46 @@ class JsonApiController extends AbstractController
         $response = new JsonResponse($data);
         $response->setEncodingOptions(JSON_PRETTY_PRINT);
         return $response;
+    }
+
+    #[Route('/api/library/books', name: 'api_library_books', methods: ['GET'])]
+    public function getAllBooks(LibraryRepository $libraryRepository): Response
+    {
+        $books = $libraryRepository->findAll();
+        $data = [];
+
+        foreach ($books as $book) {
+            $data[] = [
+                'id' => $book->getId(),
+                'title' => $book->getTitle(),
+                'author' => $book->getAuthor(),
+                'isbn' => $book->getIsbn(),
+                'image_url' => $book->getImageUrl(),
+            ];
+        }
+
+        return $this->json($data);
+    }
+
+    #[Route('/api/library/book-form', name: 'api_library_book_form', methods: ['POST'])]
+    public function createBookForm(Request $request): Response
+    {
+        $isbn = $request->request->get('isbn');
+
+        return $this->redirectToRoute('api_library_book', ['isbn' => $isbn]);
+    }
+
+    #[Route('/api/library/book/{isbn}', name: 'api_library_book', methods: ['GET'])]
+    public function getBookByIsbn(
+        LibraryRepository $libraryRepository,
+        string $isbn
+    ): Response {
+        $book = $libraryRepository->findOneBy(['isbn' => $isbn]);
+
+        if (!$book) {
+            return $this->json(['error' => 'Book with ISBN ' . $isbn . ' not found']);
+        }
+
+        return $this->json($book);
     }
 }
