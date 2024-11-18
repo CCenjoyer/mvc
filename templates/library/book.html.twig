@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Book Details{% endblock %}
+
+{% block body %}
+    {% include('library/nav.html.twig') %}
+    <h1>{{ library.title }}</h1>
+    <p>ID: {{ library.id }}</p>
+    <p>Author: {{ library.author }}</p>
+    <p>ISBN: {{ library.isbn }}</p>
+    <img src="../build/images{{ asset(library.getImageUrl|e) }}" alt="{{ library.title }}" style="max-width: 200px">
+
+    <form action="{{ path('library_delete', {'bookId': library.id}) }}" method="post">
+        <button type="submit" class="red-button">Delete</button>
+    </form>
+    <br>
+
+    <a href="{{ path('library_change', {'bookId': library.id}) }}" class="blue-button">Edit</a>
+{% endblock %}

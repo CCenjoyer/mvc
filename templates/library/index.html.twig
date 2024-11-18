@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Library{% endblock %}
+
+{% block body %}
+{% include('library/nav.html.twig') %}
+    <h1>Library</h1>
+    {{ include('flash.html.twig') }}
+    {% for book in library %}
+        <div class="book">
+            <h2><a href="{{ path('library_show', {'bookId': book.id}) }}">{{ book.getTitle|e }}</a></h2>
+            {% if book.getImageUrl|e %}
+                    <img src="build/images{{ asset(book.getImageUrl()) }}" style="width: 100px;">
+                {% else %}
+                    No image url provided
+            {% endif %}
+        </div>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create Book{% endblock %}
+
+{% block body %}
+    {% include('library/nav.html.twig') %}
+
+    <h1>Create new Book</h1>
+
+    <form class="styled_form" action="{{ path('library_create') }}" method="post">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required>
+        <br>
+
+        <label for="author">Author:</label>
+        <input type="text" id="author" name="author" required>
+        <br>
+
+        <label for="isbn">ISBN:</label>
+        <input type="text" id="isbn" name="isbn" required>
+        <br>
+
+        <label for="image_url">Image URL:</label>
+        <input type="text" id="image_url" name="image_url">
+        <br>
+
+        <button class="green-button full-width-button" type="submit">Create Book</button>
+    </form>
+{% endblock %}
