@@ -34,4 +34,17 @@
 
     <h2>Twenty-One Game</h2><br>
     <button onclick="window.location.href='{{ path('api_twenty_one') }}'">Check 21 Game status</button>
+    <br><br>
+
+    <h2>Library</h2><br>
+    <form method="post" action="{{ path('api_library_book_form') }}">
+        <label for="isbn">ISBN: </label>
+        <input type="text" id="isbn" name="isbn" required>
+        <button type="submit">Get Book</button>
+    </form>
+    <br>
+    <button onclick="window.location.href='{{ path('api_library_books') }}'">Check Library Books</button>
+    <a href="api/library/book/23-2323-123123-547">Book ISBN sample link</a>
+    <br><br>
+    
 {% endblock %}
