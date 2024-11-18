@@ -8,7 +8,7 @@
     <p>ID: {{ library.id }}</p>
     <p>Author: {{ library.author }}</p>
     <p>ISBN: {{ library.isbn }}</p>
-    <img src="../build/images{{ asset(library.getImageUrl|e) }}" alt="{{ library.title }}" style="max-width: 200px">
+    <img src="../build/images/{{ library.getImageUrl|e }}" alt="{{ library.title }}" style="max-width: 200px">
 
     <form action="{{ path('library_delete', {'bookId': library.id}) }}" method="post">
         <button type="submit" class="red-button">Delete</button>

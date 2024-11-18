@@ -10,7 +10,7 @@
         <div class="book">
             <h2><a href="{{ path('library_show', {'bookId': book.id}) }}">{{ book.getTitle|e }}</a></h2>
             {% if book.getImageUrl|e %}
-                    <img src="build/images{{ asset(book.getImageUrl()) }}" style="width: 100px;">
+                    <img src="build/images/{{ book.getImageUrl() }}" style="width: 100px;">
                 {% else %}
                     No image url provided
             {% endif %}
