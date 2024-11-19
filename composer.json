@@ -94,7 +94,8 @@
         "phpmd": "tools/phpmd/vendor/bin/phpmd . text tools/phpmd/phpmd.xml || true",
         "phpstan": "tools/phpstan/vendor/bin/phpstan analyse -c tools/phpstan/phpstan.neon || true",
         "lint": ["@phpmd", "@phpstan"],
-        "phpunit": "XDEBUG_MODE=coverage vendor/bin/phpunit"
+        "phpunit": "XDEBUG_MODE=coverage vendor/bin/phpunit",
+        "phpmetrics": "tools/phpmetrics/vendor/bin/phpmetrics --config=tools/phpmetrics/phpmetrics.json"
     },
     "conflict": {
         "symfony/symfony": "*"

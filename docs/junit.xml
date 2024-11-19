@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="" tests="40" assertions="97" errors="0" warnings="0" failures="0" skipped="0" time="0.099337">
+    <testsuite name="Project Test Suite" tests="40" assertions="97" errors="0" warnings="0" failures="0" skipped="0" time="0.099337">
+      <testsuite name="App\Tests\Cards\CardGraphicTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Cards/CardGraphicTest.php" tests="5" assertions="10" errors="0" warnings="0" failures="0" skipped="0" time="0.005012">
+        <testcase name="testInitialValues" class="App\Tests\Cards\CardGraphicTest" classname="App.Tests.Cards.CardGraphicTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Cards/CardGraphicTest.php" line="10" assertions="2" time="0.004196"/>
+        <testcase name="testAssignValue" class="App\Tests\Cards\CardGraphicTest" classname="App.Tests.Cards.CardGraphicTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Cards/CardGraphicTest.php" line="17" assertions="1" time="0.000223"/>
+        <testcase name="testAssignSuit" class="App\Tests\Cards\CardGraphicTest" classname="App.Tests.Cards.CardGraphicTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Cards/CardGraphicTest.php" line="24" assertions="1" time="0.000201"/>
+        <testcase name="testGetAsCard" class="App\Tests\Cards\CardGraphicTest" classname="App.Tests.Cards.CardGraphicTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Cards/CardGraphicTest.php" line="31" assertions="5" time="0.000206"/>
+        <testcase name="testToString" class="App\Tests\Cards\CardGraphicTest" classname="App.Tests.Cards.CardGraphicTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Cards/CardGraphicTest.php" line="51" assertions="1" time="0.000185"/>
+      </testsuite>
+      <testsuite name="App\Tests\Cards\CardHandTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Cards/CardHandTest.php" tests="4" assertions="8" errors="0" warnings="0" failures="0" skipped="0" time="0.001601">
+        <testcase name="testInitialCardCount" class="App\Tests\Cards\CardHandTest" classname="App.Tests.Cards.CardHandTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Cards/CardHandTest.php" line="11" assertions="1" time="0.000451"/>
+        <testcase name="testAddCard" class="App\Tests\Cards\CardHandTest" classname="App.Tests.Cards.CardHandTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Cards/CardHandTest.php" line="17" assertions="1" time="0.000199"/>
+        <testcase name="testGetCards" class="App\Tests\Cards\CardHandTest" classname="App.Tests.Cards.CardHandTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Cards/CardHandTest.php" line="25" assertions="3" time="0.000742"/>
+        <testcase name="testCardCount" class="App\Tests\Cards\CardHandTest" classname="App.Tests.Cards.CardHandTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Cards/CardHandTest.php" line="39" assertions="3" time="0.000209"/>
+      </testsuite>
+      <testsuite name="App\Tests\Cards\CardTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Cards/CardTest.php" tests="4" assertions="9" errors="0" warnings="0" failures="0" skipped="0" time="0.000826">
+        <testcase name="testInitialValues" class="App\Tests\Cards\CardTest" classname="App.Tests.Cards.CardTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Cards/CardTest.php" line="10" assertions="2" time="0.000189"/>
+        <testcase name="testAssignValue" class="App\Tests\Cards\CardTest" classname="App.Tests.Cards.CardTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Cards/CardTest.php" line="17" assertions="1" time="0.000224"/>
+        <testcase name="testAssignSuit" class="App\Tests\Cards\CardTest" classname="App.Tests.Cards.CardTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Cards/CardTest.php" line="24" assertions="1" time="0.000186"/>
+        <testcase name="testGetAsString" class="App\Tests\Cards\CardTest" classname="App.Tests.Cards.CardTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Cards/CardTest.php" line="31" assertions="5" time="0.000227"/>
+      </testsuite>
+      <testsuite name="App\Tests\Cards\DeckOfCardsTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Cards/DeckOfCardsTest.php" tests="7" assertions="11" errors="0" warnings="0" failures="0" skipped="0" time="0.078544">
+        <testcase name="testInitialDeckCount" class="App\Tests\Cards\DeckOfCardsTest" classname="App.Tests.Cards.DeckOfCardsTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Cards/DeckOfCardsTest.php" line="12" assertions="1" time="0.000850"/>
+        <testcase name="testDrawCard" class="App\Tests\Cards\DeckOfCardsTest" classname="App.Tests.Cards.DeckOfCardsTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Cards/DeckOfCardsTest.php" line="19" assertions="2" time="0.000721"/>
+        <testcase name="testShuffleDeck" class="App\Tests\Cards\DeckOfCardsTest" classname="App.Tests.Cards.DeckOfCardsTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Cards/DeckOfCardsTest.php" line="28" assertions="1" time="0.072018"/>
+        <testcase name="testGetCards" class="App\Tests\Cards\DeckOfCardsTest" classname="App.Tests.Cards.DeckOfCardsTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Cards/DeckOfCardsTest.php" line="38" assertions="2" time="0.000456"/>
+        <testcase name="testCardCount" class="App\Tests\Cards\DeckOfCardsTest" classname="App.Tests.Cards.DeckOfCardsTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Cards/DeckOfCardsTest.php" line="47" assertions="2" time="0.000414"/>
+        <testcase name="testSortDeck" class="App\Tests\Cards\DeckOfCardsTest" classname="App.Tests.Cards.DeckOfCardsTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Cards/DeckOfCardsTest.php" line="56" assertions="2" time="0.003350"/>
+        <testcase name="testDrawCardException" class="App\Tests\Cards\DeckOfCardsTest" classname="App.Tests.Cards.DeckOfCardsTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Cards/DeckOfCardsTest.php" line="67" assertions="1" time="0.000735"/>
+      </testsuite>
+      <testsuite name="App\Tests\Cards\GameTwentyOneTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Cards/GameTwentyOneTest.php" tests="8" assertions="19" errors="0" warnings="0" failures="0" skipped="0" time="0.007994">
+        <testcase name="testInitialScores" class="App\Tests\Cards\GameTwentyOneTest" classname="App.Tests.Cards.GameTwentyOneTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Cards/GameTwentyOneTest.php" line="11" assertions="2" time="0.001088"/>
+        <testcase name="testDrawPlayerCard" class="App\Tests\Cards\GameTwentyOneTest" classname="App.Tests.Cards.GameTwentyOneTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Cards/GameTwentyOneTest.php" line="18" assertions="2" time="0.000714"/>
+        <testcase name="testDrawDealerCard" class="App\Tests\Cards\GameTwentyOneTest" classname="App.Tests.Cards.GameTwentyOneTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Cards/GameTwentyOneTest.php" line="26" assertions="2" time="0.000449"/>
+        <testcase name="testGetPlayerHand" class="App\Tests\Cards\GameTwentyOneTest" classname="App.Tests.Cards.GameTwentyOneTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Cards/GameTwentyOneTest.php" line="34" assertions="2" time="0.000453"/>
+        <testcase name="testGetDealerHand" class="App\Tests\Cards\GameTwentyOneTest" classname="App.Tests.Cards.GameTwentyOneTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Cards/GameTwentyOneTest.php" line="43" assertions="2" time="0.000445"/>
+        <testcase name="testGetDeckCount" class="App\Tests\Cards\GameTwentyOneTest" classname="App.Tests.Cards.GameTwentyOneTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Cards/GameTwentyOneTest.php" line="52" assertions="1" time="0.000456"/>
+        <testcase name="testIsGameOver" class="App\Tests\Cards\GameTwentyOneTest" classname="App.Tests.Cards.GameTwentyOneTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Cards/GameTwentyOneTest.php" line="60" assertions="2" time="0.000811"/>
+        <testcase name="testDetermineWinner" class="App\Tests\Cards\GameTwentyOneTest" classname="App.Tests.Cards.GameTwentyOneTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Cards/GameTwentyOneTest.php" line="71" assertions="6" time="0.003578"/>
+      </testsuite>
+      <testsuite name="App\Tests\Dice\DiceGraphicTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Dice/DiceGraphicTest.php" tests="4" assertions="10" errors="0" warnings="0" failures="0" skipped="0" time="0.002083">
+        <testcase name="testInitialValueIsNull" class="App\Tests\Dice\DiceGraphicTest" classname="App.Tests.Dice.DiceGraphicTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Dice/DiceGraphicTest.php" line="10" assertions="1" time="0.000626"/>
+        <testcase name="testRollReturnsValueBetween1And6" class="App\Tests\Dice\DiceGraphicTest" classname="App.Tests.Dice.DiceGraphicTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Dice/DiceGraphicTest.php" line="16" assertions="4" time="0.000989"/>
+        <testcase name="testGetValueAfterRoll" class="App\Tests\Dice\DiceGraphicTest" classname="App.Tests.Dice.DiceGraphicTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Dice/DiceGraphicTest.php" line="24" assertions="4" time="0.000270"/>
+        <testcase name="testGetAsString" class="App\Tests\Dice\DiceGraphicTest" classname="App.Tests.Dice.DiceGraphicTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Dice/DiceGraphicTest.php" line="33" assertions="1" time="0.000197"/>
+      </testsuite>
+      <testsuite name="App\Tests\Dice\DiceHandTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Dice/DiceHandTest.php" tests="5" assertions="24" errors="0" warnings="0" failures="0" skipped="0" time="0.002334">
+        <testcase name="testAddDice" class="App\Tests\Dice\DiceHandTest" classname="App.Tests.Dice.DiceHandTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Dice/DiceHandTest.php" line="11" assertions="1" time="0.000517"/>
+        <testcase name="testRoll" class="App\Tests\Dice\DiceHandTest" classname="App.Tests.Dice.DiceHandTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Dice/DiceHandTest.php" line="19" assertions="9" time="0.000343"/>
+        <testcase name="testGetNumberDices" class="App\Tests\Dice\DiceHandTest" classname="App.Tests.Dice.DiceHandTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Dice/DiceHandTest.php" line="36" assertions="2" time="0.000199"/>
+        <testcase name="testGetValues" class="App\Tests\Dice\DiceHandTest" classname="App.Tests.Dice.DiceHandTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Dice/DiceHandTest.php" line="46" assertions="9" time="0.000369"/>
+        <testcase name="testGetString" class="App\Tests\Dice\DiceHandTest" classname="App.Tests.Dice.DiceHandTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Dice/DiceHandTest.php" line="63" assertions="3" time="0.000906"/>
+      </testsuite>
+      <testsuite name="App\Dice\DiceTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Dice/DiceTest.php" tests="3" assertions="6" errors="0" warnings="0" failures="0" skipped="0" time="0.000942">
+        <testcase name="testCreateObject" class="App\Dice\DiceTest" classname="App.Dice.DiceTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Dice/DiceTest.php" line="15" assertions="2" time="0.000203"/>
+        <testcase name="testRollDice" class="App\Dice\DiceTest" classname="App.Dice.DiceTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Dice/DiceTest.php" line="28" assertions="3" time="0.000527"/>
+        <testcase name="testGetAsString" class="App\Dice\DiceTest" classname="App.Dice.DiceTest" file="/home/joesjo/dbwebb-kurser/mvc/me/report/tests/Dice/DiceTest.php" line="42" assertions="1" time="0.000213"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>
