@@ -14,6 +14,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class LibraryController extends AbstractController
 {
+    /**
+     * @Route("/library", name="app_library")
+     * @param LibraryRepository $libraryRepository
+     * @return Response
+     */
     #[Route('/library', name: 'app_library')]
     public function index(
         LibraryRepository $libraryRepository
@@ -25,6 +30,12 @@ class LibraryController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/library/create", name="library_create", methods={"GET", "POST"})
+     * @param Request $request
+     * @param ManagerRegistry $doctrine
+     * @return Response
+     */
     #[Route('/library/create', name: 'library_create', methods: ['GET', 'POST'])]
     public function createBook(
         Request $request,
@@ -41,12 +52,22 @@ class LibraryController extends AbstractController
             $entityManager->persist($library);
             $entityManager->flush();
 
+            $this->addFlash(
+                'success',
+                'Book successfully created'
+            );
             return $this->redirectToRoute('app_library');
         }
 
         return $this->render('library/create.html.twig');
     }
 
+    /**
+     * @Route("/library/{bookId}", name="library_show", methods={"GET"})
+     * @param LibraryRepository $libraryRepository
+     * @param int $bookId
+     * @return Response
+     */
     #[Route('/library/{bookId}', name: 'library_show', methods: ['GET'])]
     public function showLibrary(
         LibraryRepository $libraryRepository,
@@ -67,15 +88,24 @@ class LibraryController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/library/change/{bookId}", name="library_change", methods={"GET", "POST"})
+     * @param LibraryRepository $libraryRepository
+     * @param ManagerRegistry $doctrine
+     * @param Request $request
+     * @param int $bookId
+     * @return Response
+     */
     #[Route('/library/change/{bookId}', name: 'library_change', methods: ['GET', 'POST'])]
     public function changeLibrary(
         LibraryRepository $libraryRepository,
         ManagerRegistry $doctrine,
-        int $bookId,
-        Request $request
+        Request $request,
+        int $bookId
     ): Response {
         if ($request->isMethod('POST')) {
             $library = $libraryRepository->find($bookId);
+
             if (!$library) {
                 $this->addFlash(
                     'warning',
@@ -83,6 +113,7 @@ class LibraryController extends AbstractController
                 );
                 return $this->redirectToRoute('app_library');
             }
+
             $library->setTitle((string) $request->request->get('title'));
             $library->setAuthor((string) $request->request->get('author'));
             $library->setIsbn((string) $request->request->get('isbn'));
@@ -110,6 +141,13 @@ class LibraryController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/library/delete/{bookId}", name="library_delete", methods={"POST"})
+     * @param LibraryRepository $libraryRepository
+     * @param ManagerRegistry $doctrine
+     * @param int $bookId
+     * @return Response
+     */
     #[Route('/library/delete/{bookId}', name: 'library_delete', methods: ['POST'])]
     public function deleteLibrary(
         LibraryRepository $libraryRepository,
@@ -130,7 +168,7 @@ class LibraryController extends AbstractController
 
         $this->addFlash(
             'success',
-            'Book with id ' . $bookId . ' deleted'
+            'Book successfully deleted'
         );
 
         return $this->redirectToRoute('app_library');

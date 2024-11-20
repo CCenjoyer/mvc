@@ -15,6 +15,11 @@ use Exception;
 
 class CardsController extends AbstractController
 {
+    /**
+     * Initialize the session with a deck and hand if they don't exist
+     * @param SessionInterface $session
+     * @return void
+     */
     private function initSession(
         SessionInterface $session
     ): void {
@@ -28,6 +33,11 @@ class CardsController extends AbstractController
         }
     }
 
+    /**
+     * @Route("/card/init", name="card_init")
+     * @param SessionInterface $session
+     * @return Response
+     */
     #[Route("/card/init", name: "card_init")]
     public function init(
         SessionInterface $session
@@ -40,6 +50,11 @@ class CardsController extends AbstractController
         return $this->redirectToRoute('card');
     }
 
+    /**
+     * @Route("/card", name="card")
+     * @param SessionInterface $session
+     * @return Response
+     */
     #[Route("/card", name: "card")]
     public function card(
         SessionInterface $session
@@ -55,6 +70,11 @@ class CardsController extends AbstractController
     }
 
 
+    /**
+     * @Route("/card/deck", name="deck")
+     * @param SessionInterface $session
+     * @return Response
+     */
     #[Route("/card/deck", name: "deck", methods: ['GET'])]
     public function deck(
         SessionInterface $session
@@ -72,6 +92,11 @@ class CardsController extends AbstractController
     }
 
 
+    /**
+     * @Route("/card/deck/sort", name="sort")
+     * @param SessionInterface $session
+     * @return Response
+     */
     #[Route("/card/deck/shuffle", name: "shuffle", methods: ['GET'])]
     public function shuffle(
         SessionInterface $session
@@ -87,6 +112,11 @@ class CardsController extends AbstractController
         return $this->render('cards/deck.html.twig', $data);
     }
 
+    /**
+     * @Route("/card/deck/draw", name="draw")
+     * @param SessionInterface $session
+     * @return Response
+     */
     #[Route("/card/deck/draw", name: "draw", methods: ['GET'])]
     public function draw(
         SessionInterface $session
@@ -115,6 +145,12 @@ class CardsController extends AbstractController
         return $this->redirectToRoute('card');
     }
 
+    /**
+     * @Route("/card/deck/draw/{num<\d+>}", name="drawX")
+     * @param int $num
+     * @param SessionInterface $session
+     * @return Response
+     */
     #[Route("/card/deck/draw/{num<\d+>}", name: "drawX")]
     public function multipleDraw(
         int $num,
@@ -126,36 +162,36 @@ class CardsController extends AbstractController
         /** @var CardHand $hand */
         $hand = $session->get("hand");
 
-        if ($deck->getCards() != []) {
-            if ($num > $deck->cardCount()) {
-                $num = $deck->cardCount();
-            }
-            $allDrawnCards = [];
-            try {
-                for ($number = 0; $number < $num; $number++) {
-                    $card = $deck->drawCard();
-                    $hand->addCard($card);
-                    $allDrawnCards[] = $card;
-                }
-            } catch (Exception $e) {
-                $this->addFlash('notice', 'Out of Cards!');
-            }
-            $cardCount = $deck->cardCount();
-            $session->set("hand", $hand);
-            $session->set("deck", $deck);
-            $data = [
-                "cards" => $allDrawnCards,
-                "deckCardCount" => $cardCount
-            ];
-            return $this->render('cards/drawX.html.twig', $data);
+        if ($deck->getCards() == []) {
+            $this->addFlash('notice', 'Out of Cards!');
+            return $this->redirectToRoute('card');
         }
-        $this->addFlash(
-            'notice',
-            'Out of Cards!'
-        );
-        return $this->redirectToRoute('card');
+
+        $num = min($num, $deck->cardCount());
+        $allDrawnCards = [];
+
+        for ($i = 0; $i < $num; $i++) {
+            $card = $deck->drawCard();
+            $hand->addCard($card);
+            $allDrawnCards[] = $card;
+        }
+
+        $session->set("hand", $hand);
+        $session->set("deck", $deck);
+
+        $data = [
+            "cards" => $allDrawnCards,
+            "deckCardCount" => $deck->cardCount()
+        ];
+
+        return $this->render('cards/drawX.html.twig', $data);
     }
 
+    /**
+     * @Route("/card/deck/draw-form", name="draw_form")
+     * @param Request $request
+     * @return Response
+     */
     #[Route("/card/deck/draw-form", name: "draw_form")]
     public function drawForm(
         Request $request

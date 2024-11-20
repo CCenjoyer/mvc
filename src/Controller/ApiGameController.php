@@ -12,11 +12,17 @@ use App\Cards\GameTwentyOne;
 
 class ApiGameController extends AbstractController
 {
+    /**
+     * @Route("/api/game", name="api_twenty_one", methods={"GET"})
+     * @param SessionInterface $session
+     * @return Response
+     */
     #[Route("/api/game", name: "api_twenty_one", methods: ['GET'])]
     public function twentyOne(SessionInterface $session): Response
     {
         /** @var GameTwentyOne $game */
         $game = $session->get("game");
+
         if (!$game instanceof GameTwentyOne) {
             $game = new GameTwentyOne();
             $session->set("game", $game);

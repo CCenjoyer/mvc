@@ -11,6 +11,11 @@ use App\Repository\LibraryRepository;
 
 class ApiLibraryController extends AbstractController
 {
+    /**
+     * @Route("/api/library/books", name="api_library_books", methods={"GET"})
+     * @param LibraryRepository $libraryRepository
+     * @return Response
+     */
     #[Route('/api/library/books', name: 'api_library_books', methods: ['GET'])]
     public function getAllBooks(LibraryRepository $libraryRepository): Response
     {
@@ -30,6 +35,11 @@ class ApiLibraryController extends AbstractController
         return $this->json($data);
     }
 
+    /**
+     * @Route("/api/library/book-form", name="api_library_book_form", methods={"POST"})
+     * @param Request $request
+     * @return Response
+     */
     #[Route('/api/library/book-form', name: 'api_library_book_form', methods: ['POST'])]
     public function createBookForm(Request $request): Response
     {
@@ -38,6 +48,12 @@ class ApiLibraryController extends AbstractController
         return $this->redirectToRoute('api_library_book', ['isbn' => $isbn]);
     }
 
+    /**
+     * @Route("/api/library/book/{isbn}", name="api_library_book", methods={"GET"})
+     * @param LibraryRepository $libraryRepository
+     * @param string $isbn
+     * @return Response
+     */
     #[Route('/api/library/book/{isbn}', name: 'api_library_book', methods: ['GET'])]
     public function getBookByIsbn(
         LibraryRepository $libraryRepository,

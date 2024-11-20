@@ -16,14 +16,20 @@ use Exception;
 
 class DiceGameController extends AbstractController
 {
+    /**
+     * @Route("/game/pig", name="pig_start")
+     * @return Response
+     */
     #[Route("/game/pig", name: "pig_start")]
     public function home(): Response
     {
         return $this->render('pig/home.html.twig');
     }
 
-
-
+    /**
+     * @Route("/game/pig/test/roll", name="test_roll_dice")
+     * @return Response
+     */
     #[Route("/game/pig/test/roll", name: "test_roll_dice")]
     public function testRollDice(): Response
     {
@@ -37,8 +43,11 @@ class DiceGameController extends AbstractController
         return $this->render('pig/test/roll.html.twig', $data);
     }
 
-
-
+    /**
+     * @Route("/game/pig/test/roll/{num<\d+>}", name="test_roll_num_dices")
+     * @param int $num
+     * @return Response
+     */
     #[Route("/game/pig/test/roll/{num<\d+>}", name: "test_roll_num_dices")]
     public function testRollDices(int $num): Response
     {
@@ -61,8 +70,11 @@ class DiceGameController extends AbstractController
         return $this->render('pig/test/roll_many.html.twig', $data);
     }
 
-
-
+    /**
+     * @Route("/game/pig/test/dicehand/{num<\d+>}", name="test_dicehand")
+     * @param int $num
+     * @return Response
+     */
     #[Route("/game/pig/test/dicehand/{num<\d+>}", name: "test_dicehand")]
     public function testDiceHand(int $num): Response
     {
@@ -86,16 +98,22 @@ class DiceGameController extends AbstractController
         return $this->render('pig/test/dicehand.html.twig', $data);
     }
 
-
-
+    /**
+     * @Route("/game/pig/init", name="pig_init_get", methods={"GET"})
+     * @return Response
+     */
     #[Route("/game/pig/init", name: "pig_init_get", methods: ['GET'])]
     public function init(): Response
     {
         return $this->render('pig/init.html.twig');
     }
 
-
-
+    /**
+     * @Route("/game/pig/init", name="pig_init_post", methods={"POST"})
+     * @param Request $request
+     * @param SessionInterface $session
+     * @return Response
+     */
     #[Route("/game/pig/init", name: "pig_init_post", methods: ['POST'])]
     public function initCallback(
         Request $request,
@@ -103,10 +121,13 @@ class DiceGameController extends AbstractController
     ): Response {
         $numDice = $request->request->get('num_dices');
 
+        /** @var DiceHand $hand */
         $hand = new DiceHand();
+
         for ($i = 1; $i <= $numDice; $i++) {
             $hand->add(new DiceGraphic());
         }
+
         $hand->roll();
 
         $session->set("pig_dicehand", $hand);
@@ -117,15 +138,18 @@ class DiceGameController extends AbstractController
         return $this->redirectToRoute('pig_play');
     }
 
-
-
+    /**
+     * @Route("/game/pig/play", name="pig_play", methods={"GET"})
+     * @param SessionInterface $session
+     * @return Response
+     */
     #[Route("/game/pig/play", name: "pig_play", methods: ['GET'])]
     public function play(
         SessionInterface $session
     ): Response {
+        /** @var DiceHand $dicehand */
         $dicehand = $session->get("pig_dicehand");
 
-        /** @var DiceHand $dicehand */
         $data = [
             "pigDices" => $session->get("pig_dices"),
             "pigRound" => $session->get("pig_round"),
@@ -136,8 +160,11 @@ class DiceGameController extends AbstractController
         return $this->render('pig/play.html.twig', $data);
     }
 
-
-
+    /**
+     * @Route("/game/pig/roll", name="pig_roll", methods={"POST"})
+     * @param SessionInterface $session
+     * @return Response
+     */
     #[Route("/game/pig/roll", name: "pig_roll", methods: ['POST'])]
     public function roll(
         SessionInterface $session
@@ -145,9 +172,11 @@ class DiceGameController extends AbstractController
         /** @var DiceHand $hand */
         $hand = $session->get("pig_dicehand");
         $hand->roll();
+
         $roundTotal = $session->get("pig_round");
         $round = 0;
         $values = $hand->getValues();
+
         foreach ($values as $value) {
             if ($value === 1) {
                 $round = 0;
@@ -166,8 +195,11 @@ class DiceGameController extends AbstractController
         return $this->redirectToRoute('pig_play');
     }
 
-
-
+    /**
+     * @Route("/game/pig/save", name="pig_save", methods={"POST"})
+     * @param SessionInterface $session
+     * @return Response
+     */
     #[Route("/game/pig/save", name: "pig_save", methods: ['POST'])]
     public function save(
         SessionInterface $session

@@ -14,6 +14,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ApiCardsController extends AbstractController
 {
+    /**
+     * Initialize the session with a deck and hand if they don't exist
+     * @param SessionInterface $session
+     * @return void
+     */
     private function initSession(
         SessionInterface $session
     ): void {
@@ -27,6 +32,11 @@ class ApiCardsController extends AbstractController
         }
     }
 
+    /**
+     * @Route("/api/deck/init", name: "api_deck_init")
+     * @param SessionInterface $session
+     * @return Response
+     */
     #[Route("/api/deck", name: "api_deck")]
     public function deck(SessionInterface $session): Response
     {
@@ -52,6 +62,11 @@ class ApiCardsController extends AbstractController
         return $response;
     }
 
+    /**
+     * @Route("/api/deck/sort", name: "api_sort", methods: ['POST'])
+     * @param SessionInterface $session
+     * @return Response
+     */
     #[Route("/api/deck/shuffle", name: "api_shuffle", methods: ['POST'])]
     public function shuffleDeck(SessionInterface $session): Response
     {
@@ -85,6 +100,11 @@ class ApiCardsController extends AbstractController
         return $response;
     }
 
+    /**
+     * @Route("/api/deck/draw", name: "api_draw", methods: ['POST'])
+     * @param SessionInterface $session
+     * @return Response
+     */
     #[Route("/api/deck/draw", name: "api_draw", methods: ['POST'])]
     public function draw(SessionInterface $session): Response
     {
@@ -109,6 +129,11 @@ class ApiCardsController extends AbstractController
         return $response;
     }
 
+    /**
+     * @Route("/api/deck/draw-form", name="draw_x_form", methods={"POST"})
+     * @param Request $request
+     * @return Response
+     */
     #[Route("/api/deck/draw-form", name: "draw_x_form", methods: ['POST'])]
     public function drawXForm(Request $request): Response
     {
@@ -116,7 +141,12 @@ class ApiCardsController extends AbstractController
         return $this->redirectToRoute('api_draw_x', ['num' => $numCards]);
     }
 
-
+    /**
+     * @Route("/api/deck/draw/{num<\d+>}", name="draw_x", methods={"GET"})
+     * @param int $num
+     * @param SessionInterface $session
+     * @return Response
+     */
     #[Route("/api/deck/draw/{num<\d+>}", name: "api_draw_x", methods: ['GET'])]
     public function drawX(int $num, SessionInterface $session): Response
     {

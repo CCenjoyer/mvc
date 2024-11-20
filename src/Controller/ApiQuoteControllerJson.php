@@ -8,6 +8,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ApiQuoteControllerJson
 {
+    /**
+     * @Route("/api/quote", name="quote")
+     * @return Response
+     */
     #[Route("/api/quote", name: "quote")]
     public function jsonNumber(): Response
     {
