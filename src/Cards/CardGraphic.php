@@ -2,6 +2,10 @@
 
 namespace App\Cards;
 
+/**
+ * Class CardGraphic
+ * @package App\Cards
+ */
 class CardGraphic extends Card
 {
     /**
@@ -30,16 +34,29 @@ class CardGraphic extends Card
         ],
     ];
 
+    /**
+     * CardGraphic constructor.
+     */
     public function __construct()
     {
         parent::__construct();
     }
 
+    /**
+     * Returns the card as a string
+     *
+     * @return string
+     */
     public function getAsCard(): string
     {
         return $this->representation[$this->suit][$this->value];
     }
 
+    /**
+     * Returns the card as a string
+     *
+     * @return string
+     */
     public function __toString(): string
     {
         return $this->getAsCard();

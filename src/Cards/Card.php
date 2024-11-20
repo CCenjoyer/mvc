@@ -2,38 +2,74 @@
 
 namespace App\Cards;
 
+/**
+ * Class Card
+ * @package App\Cards
+ */
 class Card
 {
     protected string $suit;
     protected int $value;
 
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->suit = "";
         $this->value = 0;
     }
 
-
+    /**
+     * Assigns a value to the card
+     *
+     * @param int $value
+     * @example 14
+     */
     public function assignValue(int $value): void
     {
         $this->value = $value;
     }
 
+    /**
+     * Assigns a suit to the card
+     *
+     * @param string $suit
+     * @example "Spades"
+     */
     public function assignSuit(string $suit): void
     {
         $this->suit = $suit;
     }
 
+    /**
+     * Returns the value of the card
+     *
+     * @return int
+     * @example 14
+     */
     public function getValue(): int
     {
         return $this->value;
     }
 
+    /**
+     * Returns the suit of the card
+     *
+     * @return string
+     * @example "Spades"
+     */
     public function getSuit(): string
     {
         return $this->suit;
     }
 
+    /**
+     * Returns the card as a string
+     *
+     * @return string
+     * @example "Spades Ace"
+     */
     public function getAsString(): string
     {
         $value = $this->value;

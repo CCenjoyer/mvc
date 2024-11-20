@@ -9,11 +9,19 @@ class CardHand
      */
     protected $cards;
 
+    /**
+     * CardHand constructor.
+     */
     public function __construct()
     {
         $this->cards = [];
     }
 
+
+    /**
+     * @param CardGraphic $card
+     * @return void
+     */
     public function addCard(CardGraphic $card): void
     {
         $this->cards[] = $card;
@@ -27,6 +35,9 @@ class CardHand
         return $this->cards;
     }
 
+    /**
+     * @return int
+     */
     public function cardCount(): int
     {
         return count($this->cards);

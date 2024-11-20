@@ -16,6 +16,10 @@ class DeckOfCards
         $this->cards = [];
     }
 
+    /**
+     * @param CardGraphic $card
+     * @return void
+     */
     public function addCard(CardGraphic $card): void
     {
         $this->cards[] = $card;
@@ -29,6 +33,10 @@ class DeckOfCards
         return $this->cards;
     }
 
+    /**
+     * Makes a deck of cards
+     * @return void
+     */
     public function makeDeck(): void
     {
         $this->cards = [];
@@ -43,11 +51,21 @@ class DeckOfCards
         }
     }
 
+
+    /**
+     * Shuffles the deck
+     * @return void
+     */
     public function shuffle(): void
     {
         shuffle($this->cards);
     }
 
+    /**
+     * Draws a card from the deck
+     * @return CardGraphic
+     * @throws Exception
+     */
     public function drawCard(): CardGraphic
     {
         $card = array_shift($this->cards);
@@ -57,11 +75,20 @@ class DeckOfCards
         return $card;
     }
 
+
+    /**
+     * Gets the number of cards in the deck
+     * @return int
+     */
     public function cardCount(): int
     {
         return count($this->cards);
     }
 
+    /**
+     * Sorts the deck
+     * @return void
+     */
     public function sort(): void
     {
         $sortedCards = [];
