@@ -15,7 +15,7 @@
         <h3>Codestyle</h3>
         <p>
             Också kallat Code size & Volume, detta är en mätning på hur stor din kod är / hur många rader kod du har skrivit.
-            Min applikation består just nu av 1087 rader kod enligt PhpMetrics.
+            Min applikation består just nu av 1087 rader kod enligt PhpMetrics (början av kmom06).
         </p>
 
         <h3>Coverage</h3>
@@ -166,23 +166,77 @@
 
     <p>
         Jag tänker öka antalet tester för applikationen, med fokus på controllers. Detta kommer att öka min kodtäckning och därmed
-        öka kvaliteten på min kod. Jag skulle vlija se att kodtäckningen ligger på 50% eller högre efter detta kmom.
+        öka kvaliteten på min kod. Jag skulle vlija se att kodtäckningen ligger på 40% eller högre efter detta kmom.
     </p>
 
-    <h3>Fixa issues</h3>
-    <p>
-        Jag kommer att fixa vissa eller alla av de violations som PhpMetrics hittade. Detta skulle räkna mot komplexitet och defekter i min kod.
-    </p>
-
-    <h3>Öka kommentering</h3>
+    <h3>Fixa Maintainability</h3>
     <p>
         Genom att fokusera på att öka kommenteringen för funktioner, metoder och klasser inom min kod så bör jag att kunna minska komplexiteten
         betydligt nog att PhPMetrics overview bilden bör vara för det mesta gul-grön istället för röd-gul.
     </p>
 
+    <h3>Fixa Komplexitet</h3>
+    <p>
+        Genom att flytta api routes till andra kontrollers bör minska komplexiteten i api kontrollern med låg kostnad till komplexitet inom
+        andra kontrollers och ändra övert komplexa metoder och funktioner att vara mer simpla. T.ex. multipleDraw() i CardsController.
+        Vissa issues borde också fixas för att jag gör routes mindre, mer uppdelade och mer specifika (Detta bör också gå mot komplexitet).
+    </p><br><br>
+
+    <h2>Efter fixar:</h2><br><br>
+    Detta är en bild på applikationens complexity efter att jag har ändrat routes och fixat 2 issues / 1 error (godobject):
+    Före bild finns ovan<br><br>
+    <img src="{{ asset('build/images/complexity_post_routes.png') }}" alt="" style="height: 300px;">
+
+    <br><br><br>
+    Detta är en före och efter bild på Maintanability / Complexity:<br>
+    Man kan se fler objekt, fast dem är alla antingen gröna eller gula med ett mycket högre Maintainability värde.
+    <div style="display: flex; justify-content: space-between;">
+        <img src="{{ asset('build/images/complexity_b.png') }}" alt="" style="height: 300px;">
+        <img src="{{ asset('build/images/complexity_a_c.png') }}" alt="" style="height: 250px;">
+    </div>
+
     <br><br>
+    Kommentering av alla klasser och metoder inom applikationen har hjälpt mig öka Maintainability och Complexity i min kod
+    detta leder till att min kod är lättare att förstå och underhålla.
+
+    <br><br>
+    Trots många nya tester som testat controllers så har jag inte lyckats öka min kodtäckning speciellt mycket.
+    Detta är på grund av att jag inte lyckats testa dem på korrekt sätt. Jag har testat både KernelTest och WebTest för att
+    strukturera testerna, fast de räknas inte som tester för controllers då de inte direkt kallar metoderna i controllers.
+    Testen jag skapat har för det mesta varit för att titta att routes fungerar och läser in rätt sidor. Fast jag
+    har också skapat tester för att t.ex. se till att Library Routen kan skapa och deleta böcker från biblioteket genom
+    forms.
+
+    <br><br>
+
+    I slutändan ligger min kodtäckning på strax över 40% ("vid avslut av kmom06"), då pågrund av att jag nu också testat Library klassen. Alla normala klasser utom
+    controllers bör nu ha tester. Detta är något jag är nöjd med då jag nu har en bra grund att bygga vidare på. Fast jag tänker dock
+    på att min kodtäckning antagligen ligger på någonstans runt 70% med de routes jag testat och de metoder jag testat i controllers.
+
+    <br><br><br><br>
     <h2>Diskussion</h2>
 
+    <h3>Kan man aktivt jobba med kodkvalitet och “clean code” på detta sättet?</h3>
+    Man kan ju klart se förbättringar inom de olika verktygen för att se att koden blir bättre. Och genom att helt enkelt
+    lasra in på de dåliga höga numerna eller de farligt höga kan man se till att din kod blir bättre. Detta är en bra
+    metod för att se till att din kod är bra och att den är lätt att underhålla och förstå.
+
+    <h3>Finns det fördelar och kanske nackdelar?</h3>
+    Det är lätt att identifiera problematiska delar av din kod, och visar dig simpelt vart du bör lägga din fokus för att förbättra
+    din applikation. Med mer ren kod är det lättare för andra att sätta sig in i din kod och förstå vad som händer.
+    Det uppkommer okcså mindre buggar under utveckling och det tar mindre tid att skriva ny kod. Detta är några av 
+    fördelarna med att redan ha bra och ren kodbas att arbeta med.
+
+    <br><br>
+    Att fokusera komplett på att se till att ens kod uppfyller alla krav för att vara “clean code” och ha bra nummer inom metrics
+    kan leda till betydligt mycket mer tid och ansträngning spenderad på att skriva inte särsklit avancerad kod. Detta kan leda
+    till ökad kostnad för att skriva kod och att det tar längre tid att skriva ny kod än nödvändigt.
+
+    <h3>Ser du andra möjligheter att jobba mot “clean code”?</h3>
+    Låter kanske lite dumt, men mer erfarenhet och mer tid spenderad på att skriva kod är en bra metod för att skriva bättre kod
+    om du kollar upp då och då på vilka misstag som du har gjort och hur du kan förbättra dem. Detta är främst det
+    jag tycker verktyg som dessa bör användas för, att se till att du inte gör samma misstag om och om igen och att du
+    lär dig av dina misstag.
 
 </div>
 {% endblock %}
