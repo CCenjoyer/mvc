@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class MyController extends AbstractController
 {
@@ -28,9 +29,25 @@ class MyController extends AbstractController
     }
 
     #[Route("/session", name: "session")]
-    public function session(): Response
-    {
-        return $this->render('session.html.twig');
+    public function showSession(
+        SessionInterface $session
+    ): Response {
+        $data = [
+            'session' => $session->all()
+        ];
+        return $this->render('session.html.twig', $data);
+    }
+
+    #[Route("/session/delete", name: "session/delete")]
+    public function deleteSession(
+        SessionInterface $session
+    ): Response {
+        $session->clear();
+        $this->addFlash(
+            'success',
+            'Session was successfully cleared'
+        );
+        return $this->redirectToRoute('session');
     }
 
     #[Route("/api", name: "api")]

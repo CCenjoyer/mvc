@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use App\Cards\CardHand;
+use App\Cards\DeckOfCards;
+
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -9,16 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-use App\Entity\Library;
-use App\Repository\LibraryRepository;
-use Doctrine\Persistence\ManagerRegistry;
-
-use App\Cards\CardHand;
-use App\Cards\DeckOfCards;
-use App\Cards\GameTwentyOne;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-
-class JsonApiController extends AbstractController
+class ApiCardsController extends AbstractController
 {
     private function initSession(
         SessionInterface $session
@@ -39,15 +33,14 @@ class JsonApiController extends AbstractController
         $this->initSession($session);
         /** @var DeckOfCards $deck */
         $deck = $session->get("deck");
-        // if (!$deck) {
-        //     return new JsonResponse(['error' => 'Deck not found in session'], Response::HTTP_NOT_FOUND);
-        // }
         $deckClone = clone $deck;
         $cardsData = [];
         $deckClone->sort();
+
         foreach ($deckClone->getCards() as $card) {
             $cardsData[] = $card->getAsString();
         }
+
         $deckData = [
             'cards' => $cardsData,
             'count' => $deckClone->cardCount()
@@ -66,10 +59,6 @@ class JsonApiController extends AbstractController
         /** @var DeckOfCards $deck */
         $deck = $session->get("deck");
 
-        // if (!$deck) {
-        //     return new JsonResponse(['error' => 'Deck not found in session'], Response::HTTP_NOT_FOUND);
-        // }
-
         if ($deck->cardCount() == 0) {
             $deck = new DeckOfCards();
             $deck->makeDeck();
@@ -77,18 +66,22 @@ class JsonApiController extends AbstractController
         $deck->shuffle();
         $session->set("deck", $deck);
         $cardsData = [];
+
         foreach ($deck->getCards() as $card) {
             $cardsData[] = $card->getAsString();
         }
+
         /** @var DeckOfCards $deck */
         $deckData = [
             'cards' => $cardsData,
             'count' => $deck->cardCount()
         ];
+
         $response = new JsonResponse($deckData);
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT
         );
+
         return $response;
     }
 
@@ -100,10 +93,6 @@ class JsonApiController extends AbstractController
         $deck = $session->get("deck");
         /** @var CardHand $hand */
         $hand = $session->get("hand");
-
-        // if (!$deck || !$hand) {
-        //     return new JsonResponse(['error' => 'Deck or hand not found in session'], Response::HTTP_NOT_FOUND);
-        // }
 
         $card = $deck->drawCard();
         $hand->addCard($card);
@@ -157,73 +146,5 @@ class JsonApiController extends AbstractController
         $response = new JsonResponse($data);
         $response->setEncodingOptions(JSON_PRETTY_PRINT);
         return $response;
-    }
-
-    #[Route("/api/game", name: "api_twenty_one", methods: ['GET'])]
-    public function twentyOne(SessionInterface $session): Response
-    {
-        /** @var GameTwentyOne $game */
-        $game = $session->get("game");
-        if (!$game instanceof GameTwentyOne) {
-            $game = new GameTwentyOne();
-            $session->set("game", $game);
-        }
-
-        $playerHand = array_map(fn ($card) => $card->getAsString(), $game->getPlayerHand());
-        $dealerHand = array_map(fn ($card) => $card->getAsString(), $game->getDealerHand());
-
-        $data = [
-            "playerscore" => $game->getPlayerScore(),
-            "playerhand" => $playerHand,
-            "dealerscore" => $game->getDealerScore(),
-            "dealerhand" => $dealerHand,
-            "deckcount" => $game->getDeckCount(),
-            "isgameover" => $game->isGameOver(),
-            "winner" => $game->determineWinner(),
-        ];
-        $response = new JsonResponse($data);
-        $response->setEncodingOptions(JSON_PRETTY_PRINT);
-        return $response;
-    }
-
-    #[Route('/api/library/books', name: 'api_library_books', methods: ['GET'])]
-    public function getAllBooks(LibraryRepository $libraryRepository): Response
-    {
-        $books = $libraryRepository->findAll();
-        $data = [];
-
-        foreach ($books as $book) {
-            $data[] = [
-                'id' => $book->getId(),
-                'title' => $book->getTitle(),
-                'author' => $book->getAuthor(),
-                'isbn' => $book->getIsbn(),
-                'image_url' => $book->getImageUrl(),
-            ];
-        }
-
-        return $this->json($data);
-    }
-
-    #[Route('/api/library/book-form', name: 'api_library_book_form', methods: ['POST'])]
-    public function createBookForm(Request $request): Response
-    {
-        $isbn = $request->request->get('isbn');
-
-        return $this->redirectToRoute('api_library_book', ['isbn' => $isbn]);
-    }
-
-    #[Route('/api/library/book/{isbn}', name: 'api_library_book', methods: ['GET'])]
-    public function getBookByIsbn(
-        LibraryRepository $libraryRepository,
-        string $isbn
-    ): Response {
-        $book = $libraryRepository->findOneBy(['isbn' => $isbn]);
-
-        if (!$book) {
-            return $this->json(['error' => 'Book with ISBN ' . $isbn . ' not found']);
-        }
-
-        return $this->json($book);
     }
 }

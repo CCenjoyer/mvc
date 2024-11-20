@@ -2,8 +2,6 @@
 
 namespace App\Controller;
 
-use App\Cards\Card;
-use App\Cards\CardGraphic;
 use App\Cards\CardHand;
 use App\Cards\DeckOfCards;
 
@@ -28,28 +26,6 @@ class CardsController extends AbstractController
             $deck->makeDeck();
             $session->set("deck", $deck);
         }
-    }
-
-    #[Route("/session", name: "session")]
-    public function showSession(
-        SessionInterface $session
-    ): Response {
-        $data = [
-            'session' => $session->all()
-        ];
-        return $this->render('session.html.twig', $data);
-    }
-
-    #[Route("/session/delete", name: "session/delete")]
-    public function deleteSession(
-        SessionInterface $session
-    ): Response {
-        $session->clear();
-        $this->addFlash(
-            'success',
-            'Session was successfully cleared'
-        );
-        return $this->redirectToRoute('session');
     }
 
     #[Route("/card/init", name: "card_init")]

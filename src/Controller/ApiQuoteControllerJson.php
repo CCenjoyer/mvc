@@ -3,11 +3,10 @@
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class QuoteControllerJson
+class ApiQuoteControllerJson
 {
     #[Route("/api/quote", name: "quote")]
     public function jsonNumber(): Response
