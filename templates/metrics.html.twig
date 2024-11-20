@@ -3,8 +3,186 @@
 {% block title %}Metrics{% endblock %}
 
 {% block body %}
+
+
+
+<div id="metrics">
     <h1>Metrics</h1>
+    
+    <br>
+
+    <h2>Introduktion</h2>
+        <h3>Codestyle</h3>
+        <p>
+            Också kallat Code size & Volume, detta är en mätning på hur stor din kod är / hur många rader kod du har skrivit.
+            Min applikation består just nu av 1087 rader kod enligt PhpMetrics.
+        </p>
+
+        <h3>Coverage</h3>
+        <p>
+            Coverage är en mätning på hur mycket av koden som körs av testerna. Detta är en viktig del av att skriva bra kod då det
+            hjälper dig att se om du har testat allt. I min kod så har jag till en början en coverage på 25%, detta är på grund
+            av att jag endast testat mina normala klasser och inte mina controllers eller databas från doctrine.
+            Detta är något jag kommer att förbättra i framtiden i alla fall för controllers.
+        </p>
+
+        <h3>Complexity</h3>
+        <p>
+            Complexity är en mätning på hur komplex din kod är. Detta en hög komplexitet kan vara på grund av många conditions eller nestade loops.
+            Min kod har en (Average cyclomatic complexity by class) av 4.21 och en (Average relative System complexity) på 103.93.
+            Komplexitet kan också minska med bra kommentering till koden vilket kommer vara en större fokus vid förbättring.
+        </p>
+
+        <p>
+            En hög komplexitet kan vara svår att underhålla och förstå. Detta kan leda till att det blir svårare att hitta buggar och att
+            det tar längre tid att skriva ny kod / skriva tester för kod. Det är därför viktigt att hålla koden så enkel som möjligt.
+        </p>
+
+        <h3>Cohesion</h3>
+        <p>
+            Cohesion är hur väl metoder inom en klass hör ihop. <em>"Things that need to change together should exist together."</em>
+            Lägre värden indikerar fokuserade klasser med ett enda ansvar, vilket innebär "hög cohesion", där metoderna verkligen hör hemma i klassen.
+
+            Och högre värden indikerar att klassen har flera ansvarsområden, vilket innebär "låg cohesion".
+        </p>
+
+        <h3>Coupling</h3>
+        <p>
+            Coupling handlar om hur beroende en klass är av andra. Det finns två olika typer of coupling, Afferent och Efferent coupling.
+            Afferent coupling är antalet klasser som är beroende av en specifik klass.
+            Efferent coupling är antalet klasser som en specifik klass är beroende av.
+        </p>
+        <p>
+            I min kod så har jag en hög efferent coupling i mina controllers. Detta beror på att mina controllers kan vara beroende av många
+            klasser för att bygga innehåll på sidor. De flesta klasserna utom kontrollerna har en antingen låg eller ingen efferent coupling alls
+            fast kan ha 0-3 afferent couplings. Detta beror just helt klart på skalan av din applikation och hur mycket du återanvänder dina klasser
+            för att skapa nya klasser.
+        </p>
+
+        <h3>CRAP</h3>
+        <p>
+            <em>Change Risk Analyzer and Predictor</em> är en mätning på hur riskabel en metod är att ändra.
+            Mätningen är baserad på hur komplex metoden är och hur många tester som finns för metoden. Ett score < 12 är bra 12 - 16 medelbra, 20 är ok och > 25 är dåligt.
+            Den perfekta metoden har ett score på 1, det mesta av mina metoder har ett score på 1-6 fast jag har några metoder inom controllers som
+            skulle kunna behöva lite kärlek.
+        </p>
+        <p>    
+            Nämligen LibraryController::changeLibrary() med 20, DiceGameController::testDiceHand()	20 och 
+            CardsController::multipleDraw() med ett score av 30. Detta är dock inte något
+            som har prio för mig då dessa controller funktioner spelar endast sina egna syften och är inte tänkta att ändras eller
+            användas i andra ändamål, speciellt de som skapade tidigare i kursen då man endast gjorde routern för att visa hur klasserna kan användas.
+            Verklig anvädning av klasserna sker i t.ex. TwentyOne spelet.
+        </p>
+
+        <p>
+
+        </p>
+
+    <br><br>
+    <h2>Phpmetrics</h2>
+
+
+    <br>
+    Complexity / Maintanability med och utan kommentarer:<br>
+    <div style="display: flex; justify-content: space-between;">
+        <img src="{{ asset('build/images/complexity_b.png') }}" alt="" style="height: 300px;">
+        <img src="{{ asset('build/images/complexity_b2.png') }}" alt="" style="height: 300px;">
+    </div>
+    Detta visar att ökad kommentering kan minska komplexiteten i koden, fast det är inte alltid så när det kommer till mindre klasser.
+
+    <br><br>
+    <img src="{{ asset('build/images/complexity_class_b.png') }}" alt="" style="height: 300px;"><br><br>
+    Här kan man se att de flesta komplexa klasserna är controllers. Detta är dels för att controllers har många ansvarsområden och är beroende av många andra klasser för att skapa innehåll på sidor.
+    <br><br>
+
+    <p>
+        Mer än det så hade jag 7 <em>violations</em> som jag kan fixa. 3 av dem är Probably bugged, 3 till är Stable Abstractions Principle,
+        fast den stora <em>error</em>n
+        är på grund av att i varje kmom har vi behövt lägga till api routes
+        som svarar med data i form av json. Dessa router har jag tyckt passa inom en specifik controller, API controllern som jag gjorde
+        i början av kursen. Tydligen så är det inte en bra idé att ha dessa routes i samma controller då kontrollern känns igen
+        som en <em>Blob / God object</em> på grund av att den har för många ansvarsområden. Detta är
+        dock en enkel fix då jag kan flytta dessa routes till andra kontrollers där dem hör bättre till trots att jag
+        tycker att en specifik api kontroller är mer passande.
+    </p>
+    
+
+    <p>
+    </p>
+
+
+    <br><br>
+    <h2>Scrutinizer</h2><br>
+
+    Nuvarande Badges:<br>
+    <div class="scrutinizer-badges" style="font-size: 0; margin: 10px;">
+        <a href="https://scrutinizer-ci.com/g/CCenjoyer/mvc" target="_blank">
+            <img src="https://scrutinizer-ci.com/g/CCenjoyer/mvc/badges/quality-score.png?b=main" alt="Scrutinizer Quality Score">
+        </a>
+        <a href="https://scrutinizer-ci.com/g/CCenjoyer/mvc" target="_blank">
+            <img src="https://scrutinizer-ci.com/g/CCenjoyer/mvc/badges/coverage.png?b=main" alt="Scrutinizer Code Coverage">
+        </a>
+        <a href="https://scrutinizer-ci.com/g/CCenjoyer/mvc" target="_blank">
+            <img src="https://scrutinizer-ci.com/g/CCenjoyer/mvc/badges/code-intelligence.svg?b=main" alt="Scrutinizer Code Intelligence">
+        </a>
+        <a href="https://scrutinizer-ci.com/g/CCenjoyer/mvc" target="_blank">
+            <img src="https://scrutinizer-ci.com/g/CCenjoyer/mvc/badges/build.png?b=main" alt="Scrutinizer Build Status">
+        </a>
+    </div>
+
+    Tidigare Badges:<br>
+    <img src="{{ asset('build/images/s_badges_b.png') }}" alt="" style="height: 300px;">
+
+    <p>
+        Scrutinizer gav mig ett quality score på 9.97 av 10. Detta är ett bra score och betyder att min kod är av hög kvalitet.
+        De resterande 0.03 är på grund av en metod inom spelet TwentyOne som är för komplex med sina 7 conditions. Detta 
+        är något som jag inte specifikt kommer att förbättra då jag anser att det är en rimlig mängd conditions för att metoden
+        ska utföra sitt jobb och att dela upp den i flera metoder skulle göra koden mer komplex.
+    </p>
+
+    <div style="display: flex; justify-content: space-between;">
+        <img src="{{ asset('build/images/least_tested_b.png') }}" alt="" style="height: 300px;">
+        <img src="{{ asset('build/images/least_tested_op_b.png') }}" alt="" style="height: 300px;">
+    </div>
+
+    <p>
+        CRAP score för individuella metoder inom kontrollers var något för höga.
+    </p>
+    <p>
+        Nämnbart är att CRAP score för normala klasser och metoder är betydligt mycket lägre.
+    </p>
+
+    <img src="{{ asset('build/images/coverage.png') }}" alt="" style="height: 300px;">
+    <p>
+        Jag har också en coverage på 25% vilket är lågt. Detta är på grund av att jag inte har testat mina controllers eller databasen
+        skapad från doctrine.
+    </p>
 
     
-    
+    <br><br>
+    <h2>Förbättringar</h2>
+
+    <h3>Öka kodtäckning</h3>
+
+    <p>
+        Jag tänker öka antalet tester för applikationen, med fokus på controllers. Detta kommer att öka min kodtäckning och därmed
+        öka kvaliteten på min kod. Jag skulle vlija se att kodtäckningen ligger på 50% eller högre efter detta kmom.
+    </p>
+
+    <h3>Fixa issues</h3>
+    <p>
+        Jag kommer att fixa vissa eller alla av de violations som PhpMetrics hittade. Detta skulle räkna mot komplexitet och defekter i min kod.
+    </p>
+
+    <h3>Öka kommentering</h3>
+    <p>
+        Genom att fokusera på att öka kommenteringen för funktioner, metoder och klasser inom min kod så bör jag att kunna minska komplexiteten
+        betydligt nog att PhPMetrics overview bilden bör vara för det mesta gul-grön istället för röd-gul.
+    </p>
+
+    <br><br>
+    <h2>Diskussion</h2>
+
+
+</div>
 {% endblock %}
