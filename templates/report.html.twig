@@ -244,7 +244,66 @@
     
 
 
+    <div class="kmomcontent">
+        <h2 id="kmom06">Kmom06</h2>
 
-    <h2 id="kmom06">Kmom06</h2>
-    <h2 id="kmom07">Kmom07-Kmom10</h2>
+        <h3 class="kmomtextheader">Hur uppfattade du verktyget phpmetrics och fann du några särskilda bitar mer värdefulla än andra? Var det några särskilda metrics eller bilder du uppskattade?</h3>
+        <p>
+            Jag tyckte om huvudbilden som fanns tillgänglig på översikts vyn, den är simpel, visar vilka moduler som kan behöva lite kärlek och vilka som är i bra skick. I och
+            med att bilden är så enkel också så kan man direkt se hur stor påverkan vissa ändringar kan ha på koden. T.ex. att lägga till kommentarer på alla klasser
+            metoder och kontrollers gjorde att färgen på modulerna inom bilden gick från främst röd till en 50/50 mix av gul-grön. Jag tycker att enkla diagram och bilder
+            som dessa är väldigt användbara för att få en snabb överblick över koden, dess kvalitet och tillåter en att snabbt identifiera problematiska delar av koden.
+        </p>
+
+        <p>
+            Komplexitets tabellen var också väldigt användbar, då den visar vilka klasser som är mest komplexa och kan behöva delas upp i mindre delar samt vilka som är
+            enkla kan lämnas som dem är. Coolt var det också att kunna se hur många klasser som beror/är beroende av andra klasser och hur många det är. 
+            Detta var inte speciellt någonting som jag fördjupade mig in inom kmom:et fast jag tycker att det är en intressant aspekt av phpmetrics.
+        </p>
+        
+        <h3 class="kmomtextheader">Berätta hur det gick att integrera med Scrutinizer och vilken är din första känsla av verktyget och dess badges? Vilken kodtäckning och kodkvalitet fick du efter första bygget?</h3>
+        <p>
+            Till en början råkade jag integrera det utan scrutinizer.yml filen, fast avbröt det snabbt. Efter att ha lagt till filen och konfigurerat den så gick det smidigt att integrera.
+            Scrutinizer gav mig en kodkvalitet på 9.97 till att börja med, vilket jag var väldigt nöjd med. Resterande 0.03 poäng drogs av på grund av en specifik metod inom
+            GameTwentyOne klassen som hade ett par för många conditions. Skulle nog kunna bryta ut den i mindre funktioner, men kände att det inte var nödvändigt. Min kodtäckning
+            till en början var 25.5%, detta var med alla normala klasser och deras metoder testade, fast inte controllers eller routes.
+        </p>
+
+        <p>
+            Jag försökte under Kmom:ets gång att öka kodtäckningen på applikationen, klassen Library som skapades under Kmom05 hade ännu inga tester alls och ledde till en ökning
+            i code-coverage på runt 4%. Fast ungefär 70% av koden som kan täckas av tester är bestånde av controllers och routes. Jag har tidigare inte testat dem alls men
+            försökte under detta kmom, till ingen lycka alls... Jag skapade många tester för många av de olika kontrollerna och fick dem att visa att sidor lästes in ordentligt och
+            att vissa formulär fungerar som tänkt, fast inget av det hjälpte med kodtäckningen alls. Tyvärr, även om mina tester fungerade bra för mig i min miljö så orsakade dem
+            stora problem för scrutinizer, och misslyckades med builden.
+        </p>
+
+        <p>
+            Badges är en fin touch, och kan få en att känna sig lite stolt över sin kod. Fast jag tror att det är viktigt att inte stirra sig blind på dem, då de inte alltid
+            är en indikation av kvaliteten på koden. Jag tycker att det är viktigt att använda sig av verktygen för att inte bara förbättra koden, utan också
+            för att förstå varför koden är som den är och hur du undviker att göra samma misstag i framtiden.
+        </p>
+
+        <h3 class="kmomtextheader">Hur är din egen syn på kodkvalitet, berätta lite om den? Tror du man kan man påvisa kodkvalitet i någon viss mån med badges eller vad tror du?</h3>
+        <p>
+            Konceptet är fint, fast jag är inte helt hundra på hur väl det fungerar i praktiken. T.ex. code coverage som indikerar hur mycket av din kod som utförs
+            av dina tester tycker man bör vara runt 90-100%. Fast vissa delar av kod kanske inte tjänar sig att testas, eller är såpass svåra att testa att det inte är värt det.
+        </p>
+
+        <p>
+            Ett projekt med 10 scrutinizer poäng, 100% code coverage och inga problem alls inom PHPmetrics, talar för mig ingenting om kvaliteten på koden utan snarare att
+            projektet självt är såpass simpelt att det inte finns något att klaga på. Man kan efterstäva att ha ren <em>ren kod</em> som möjligt, fast att eftersöka 100% perfektion
+            är i de flesta fall helt onödigt. Såklart så finns det delar av koden som bör vara så ren, säker och testad som möjligt, t.ex. säkerhetsrelaterade delar.
+        </p>
+
+
+        <h3 class="kmomtextheader">Vilken är din TIL för detta kmom?</h3>
+        <p>
+            I detta kmom har jag lärt mig att använda mig av phpmetrics och scrutinizer för att mäta kodkvalitet, kodtäckning och för att implementera
+            et CI/CD arbetsflöde där kod som pushas till GitHub automatiskt går igenom tester och kodkvalitetskontroller. Jag har också fördjupat mig inom dessa verktyg
+            för att använda tillgiven information om problematiska delar koden för att identifiera samt förbättra och optimera dem.
+        </p>
+
+    </div>
+
+<h2 id="kmom07">Kmom07-Kmom10</h2>
 {% endblock %}
