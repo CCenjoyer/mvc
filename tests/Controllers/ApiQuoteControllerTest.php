@@ -6,13 +6,10 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class ApiQuoteControllerJsonTest extends WebTestCase
 {
-
     public function testJsonNumber(): void
     {
         $client = static::createClient();
-        $client->request('GET', '/api/quote', [], [], [
-            'HTTP_ACCEPT' => 'application/json',
-        ]);
+        $client->request('GET', '/api/quote');
 
         $this->assertResponseIsSuccessful();
         $this->assertResponseHeaderSame('Content-Type', 'application/json');
