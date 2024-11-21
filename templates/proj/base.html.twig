@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html class="blackjack">
+    <head>
+        <meta charset="UTF-8">
+        <title>Black Jack</title>
+        <link rel="icon" href="{{ asset('img/glider.svg') }}">
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
+    </head>
+    <body class="blackjack">
+        <header class="blackjack-header">
+            <span class="site-title">BlackJack</span>
+        </header>
+        <nav class="blackjack-nav">
+            <ul>
+                <li><a href="{{ path('home') }}">Home</a></li>
+                <li><a href="{{ path('blackjack_about') }}">About</a></li>
+                <li><a href="{{ path('blackjack') }}">Play</a></li>
+            </ul>
+        </nav>
+        <main class="blackjack-main">
+        {% block body %}{% endblock %}
+        </main>
+    </body>
+</html>

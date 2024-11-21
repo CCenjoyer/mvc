@@ -1,0 +1,87 @@
+{% extends "proj/base.html.twig" %}
+
+{% block body %}
+    <div class="player-money" style="position: absolute; top: 20px; right: 20px;">
+        <h2>Player's Money</h2>
+        <p class="{{ money >= startingMoney ? 'money-positive' : 'money-negative' }}" style="font-size: 1.3em;">
+            {{ money }}
+        </p>
+    </div>
+    <div class="game-container">
+        <div class="dealer-section">
+            <h2>Dealer Hand</h2>
+            <p>Score: {{ dealerScore }}</p>
+            <div class="dealer-hand">
+                {% for card in dealer.getCards %}
+                    <span class="card">{{ card }}</span>
+
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="players-section">
+            {% for player in players %}
+                {% if loop.index == currentPlayer + 1 and not playersTurnsOver %}
+                    <div class="player-hand" style="font-size: 0.8em; border-radius: 10px; border: 3px solid white; background-color: rgb(179, 179, 179);">
+                {% elseif player.isBust %}
+                    <div class="player-hand" style="font-size: 0.8em; border-radius: 10px; border: 3px solid white; background-color: rgb(185, 31, 31);">
+                {% else %}
+                    <div class="player-hand" style="font-size: 0.8em; border-radius: 10px;">
+                {% endif %}
+                
+                    <h3>Player {{ loop.index }} Bet: {{ player.getBet }}</h3>
+                    <p>Score: {{ player.getScore }}</p>
+                    <div class="blackjack-card-hand">
+                        <div class="blackjack-cards" style="white-space: nowrap;">
+                            {% for card in player.hand.getCards %}
+                                <span class="card">{{ card }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="game-status">
+            <p>{{ isGameOver ? 'Game Over' : '' }}</p>
+        </div>
+        {% if not playersTurnsOver %}
+            <div class="actions" style="text-align: center;">
+                <a href="{{ path('blackjack_game_hit') }}" class="green-button" style="width: 200px; margin-right: 10px;">Hit</a>
+                <a href="{{ path('blackjack_game_stand') }}" class="red-button" style="width: 200px; margin-left: 10px;">Stand</a>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="player-stats" style="margin-top: 20px;">
+        <h2>All Player Stats</h2>
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr>
+                    <th style="border: 1px solid black; padding: 8px;">Player</th>
+                    <th style="border: 1px solid black; padding: 8px;">Bet</th>
+                    <th style="border: 1px solid black; padding: 8px;">Score</th>
+                    <th style="border: 1px solid black; padding: 8px;">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for player in players %}
+                    <tr>
+                        <td style="border: 1px solid black; padding: 8px;">Player {{ loop.index }}</td>
+                        <td style="border: 1px solid black; padding: 8px;">{{ player.getBet }}</td>
+                        <td style="border: 1px solid black; padding: 8px;">{{ player.getScore }}</td>
+                        <td style="border: 1px solid black; padding: 8px;">
+                            {% if player.isBust %}
+                                Bust
+                            {% elseif loop.index == currentPlayer + 1 and not playersTurnsOver %}
+                                Current Turn
+                            {% else %}
+                                In Game
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

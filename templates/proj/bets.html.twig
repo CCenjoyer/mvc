@@ -1,0 +1,17 @@
+{% extends "proj/base.html.twig" %}
+
+{% block body %}
+    {# <div class="player-money" style="position: absolute; top: 20px; right: 20px;">
+        <h2>Player's Money</h2>
+        <p class="{{ money >= startingMoney ? 'money-positive' : 'money-negative' }}" style="font-size: 1.3em;">
+            {{ money }}
+        </p>
+    </div> #}
+    <form class="styled_form " action="{{ path('blackjack_process_bets') }}" method="get">>
+        {% for player in players %}
+            <label style="color: black;" for="player{{ loop.index + 1 }}Bet">Player {{ loop.index }} Bet:</label>
+            <input type="number" id="player{{ loop.index }}Bet" name="player{{ loop.index }}Bet" value="0" min="0" required>
+        {% endfor %}
+        <button class="full-width-button blue-button" type="submit">Place Bets</button>
+    </form>
+{% endblock %}
