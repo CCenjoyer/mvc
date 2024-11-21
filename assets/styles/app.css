@@ -368,3 +368,143 @@ h1 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #f9f9f9;
 }
+
+
+.blackjack {
+    max-width: none;
+    max-height: none;
+    background-color: rgb(85, 85, 85);
+    height: 100%;
+    border: none;
+    color: white;
+}
+
+.blackjack-header {
+    background-color: rgb(53, 150, 53);
+    color: white;
+    animation: greenPulse 3s infinite;
+}
+
+@keyframes greenPulse {
+    0% {
+        background-color: rgb(53, 117, 53);
+    }
+    50% {
+        background-color: rgb(62, 161, 62);
+        transition: background-color 1.5s ease-in-out;
+    }
+    100% {
+        background-color: rgb(36, 124, 36);
+    }
+}
+
+.blackjack-header {
+    background-color: rgb(53, 150, 53);
+    color: white;
+    animation: greenPulse 3s infinite;
+    height: 120px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.blackjack-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(32, 32, 32);
+    color: white;
+    min-height: 45px;
+    border-bottom: 3px solid rgb(75, 75, 75);
+    flex-direction: row;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.blackjack-nav ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    margin: 0;
+}
+
+.blackjack-nav ul li {
+    margin-right: 10px;
+}
+
+.blackjack-nav ul li a {
+    text-decoration: none;
+    font-size: 1.2em;
+    color: white;
+}
+
+.blackjack-nav ul li a:hover {
+    color: lightgrey;
+}
+
+.blackjack-main {
+    margin-top: 1em;
+    padding-right: 3em;
+    padding-left: 3em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    background-color: rgb(128, 128, 128);
+    border-radius: 20px;
+    max-width: 90%;
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dealer-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.dealer-hand {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.players-section {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    width: 100%;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.money-positive {
+    color: green;
+    text-shadow: 1px 1px 2px white, -1px -1px 2px white, 1px -1px 2px white, -1px 1px 2px white;
+}
+.money-negative {
+    color: red;
+    text-shadow: 1px 1px 2px white, -1px -1px 2px white, 1px -1px 2px white, -1px 1px 2px white;
+}
+
+.blackjack-card-hand {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    border-radius: 20px;
+}
+
+.blackjack-card {
+    font-size: 10em;
+}
