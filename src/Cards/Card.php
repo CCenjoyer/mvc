@@ -13,11 +13,13 @@ class Card
 
     /**
      * Constructor
+     * @param string $suit
+     * @param int $value
      */
-    public function __construct()
+    public function __construct($suit = "", $value = 0)
     {
-        $this->suit = "";
-        $this->value = 0;
+        $this->suit = $suit;
+        $this->value = $value;
     }
 
     /**

@@ -37,9 +37,9 @@ class CardGraphic extends Card
     /**
      * CardGraphic constructor.
      */
-    public function __construct()
+    public function __construct(string $suit = "", int $value = 0)
     {
-        parent::__construct();
+        parent::__construct($suit, $value);
     }
 
     /**
