@@ -4,6 +4,10 @@ namespace App\Cards;
 
 class BlackJackUtility
 {
+    /**
+     * @param CardHand $hand
+     * @return int
+     */
     public function countScore(CardHand $hand): int
     {
         $score = 0;
