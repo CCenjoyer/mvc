@@ -8,7 +8,7 @@
             <p>Good luck!</p>
         </div>
 
-        <form class="styled_form " action="{{ path('blackjack_init') }}" method="get" style="color: black; max-width: 500px;">
+        <form class="styled_form " action="{{ path('blackjack_init') }}" method="post" style="color: black; max-width: 500px;">
             <label for="startingMoney">Starting Money:</label>
             <input type="number" id="startingMoney" name="startingMoney" value="100" min="1" max="1000000">
             

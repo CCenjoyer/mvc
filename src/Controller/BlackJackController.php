@@ -44,13 +44,13 @@ class BlackJackController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    #[Route('/proj/init', name: 'blackjack_init')]
+    #[Route('/proj/init', name: 'blackjack_init', methods: ['POST'])]
     public function init(
         SessionInterface $session,
         Request $request
     ): Response {
-        $money = $request->query->getInt('startingMoney', 100);
-        $players = $request->query->getInt('players', 1);
+        $money = $request->request->getInt('startingMoney', 100);
+        $players = $request->request->getInt('players', 1);
         $this->initSession($session, $money, $players);
         return $this->redirectToRoute('blackjack_game_bets');
     }
