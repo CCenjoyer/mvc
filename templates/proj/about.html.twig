@@ -3,4 +3,56 @@
 {% block body %}
     <h1>About BlackJack</h1>
     
+    <h2>The Basics of BlackJack</h2>
+    <p>
+    The game begins with a standard deck of 52 cards.
+    The objective is simple: each player tries to get as close to a hand total of 21 as possible without exceeding it.
+    At the same time, players aim to beat the dealer’s total. If a player’s hand goes over 21, they "bust" and lose automatically.
+    </p>
+
+    <h2>How the Game Works</h2>
+    <h3>Setup</h3>
+    <p>At the start of the game, the dealer gives every player two cards, face up on the table. The dealer, on the other hand,
+    deals themselves two cards: one face up and one face down (the “hole” card). Players must decide their strategy based on their hand total and the
+    dealer's visible card.</p>
+
+    <h3>Card Values</h3>
+    <p>Each card has a point value:</p>
+    <ul>
+        <li>Number cards from 2 to 10 are worth their face value. For example, a 7 of Hearts is worth 7 points.</li>
+        <li>Face cards (Jack, Queen, King) are each worth 10 points.</li>
+        <li>Aces are special: they can count as either 1 or 11 points, depending on what benefits the hand the most.
+        For instance, if you have an Ace and a 9, your total can be 20 (11 + 9). But if you later draw another card and go over 21,
+        the Ace can shift to a value of 1.</li>
+    </ul>
+
+    <h3>Gameplay</h3>
+    <p>Players take turns acting on their hands. The dealer moves last. Here’s how a player’s turn unfolds:</p>
+
+    <h4>Hit or Stand</h4>
+    <p>
+    A player can choose to "hit" (take an additional card) to increase their hand total or "stand" to keep their current hand.
+    A player can continue hitting until they either stand or bust by exceeding 21.
+    </p>
+
+
+    <h3>Dealer’s Turn</h3>
+    <p>Once all players have acted, the dealer reveals their hole card and plays according to fixed rules. Typically, the dealer must:</p>
+    <ul>
+        <li>Draw cards (hit) until their total is at least 17.</li>
+        <li>Stand on totals of 17 or higher (including "soft 17," which includes an Ace counted as 11).</li>
+    </ul>
+
+    <h3>Winning the Hand</h3>
+    <p>At the end of the round, each player’s hand is compared to the dealer’s:</p>
+    <ul>
+        <li>A player wins if their total is closer to 21 than the dealer’s, without busting.</li>
+        <li>A "blackjack" (an Ace + a 10-value card) automatically wins, often with a payout of 3:2.</li>
+        <li>If the dealer busts, all remaining players win.</li>
+        <li>If the player and dealer tie with the same total, it’s a "push," and the player’s bet is returned.</li>
+    </ul>
+
+    <h3>Betting</h3>
+    <p>Players place bets before cards are dealt. If a player wins, they receive a payout according to the game’s rules
+    (typically 1:1 for a win, 3:2 for a blackjack).</p>
 {% endblock %}

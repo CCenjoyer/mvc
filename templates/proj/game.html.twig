@@ -10,14 +10,22 @@
     <div class="game-container">
         <div class="dealer-section">
             <h2>Dealer Hand</h2>
-            <p>Score: {{ dealerScore }}</p>
+            <p>Score: {{ isDealerTurn ? dealerScore : dealer.getCards[0].getValue }}</p>
             <div class="dealer-hand">
+            {% if not isDealerTurn %}
+                <span class="card">{{ dealer.getCards[0] }}</span>
+                <span class="card">{{ cardBack }}</span>
+            {% else %}
                 {% for card in dealer.getCards %}
-                    <span class="card">{{ card }}</span>
-
+                <span class="card">{{ card }}</span>
                 {% endfor %}
+            {% endif %}
             </div>
         </div>
+
+        {# PlayerIndex: {{ currentPlayer}}
+        PlayerTurnsOver: {{ playersTurnsOver }}
+        DealerTurn: {{ isDealerTurn}} #}
 
         <div class="players-section">
             {% for player in players %}
@@ -29,7 +37,7 @@
                     <div class="player-hand" style="font-size: 0.8em; border-radius: 10px;">
                 {% endif %}
                 
-                    <h3>Player {{ loop.index }} Bet: {{ player.getBet }}</h3>
+                    <h3>Hand {{ loop.index }} | Bet: {{ player.getBet }}</h3>
                     <p>Score: {{ player.getScore }}</p>
                     <div class="blackjack-card-hand">
                         <div class="blackjack-cards" style="white-space: nowrap;">
@@ -50,7 +58,17 @@
                 <a href="{{ path('blackjack_game_hit') }}" class="green-button" style="width: 200px; margin-right: 10px;">Hit</a>
                 <a href="{{ path('blackjack_game_stand') }}" class="red-button" style="width: 200px; margin-left: 10px;">Stand</a>
             </div>
+        {% elseif playersTurnsOver and dealerScore < 17 %}
+            <div class="actions" style="text-align: center;">
+                <a href="{{ path('blackjack_dealer_draw') }}" class="green-button" style="width: 200px;">Dealer Draw</a>
+            </div>
+        {% elseif playersTurnsOver and dealerScore >= 17 %}
+            <div class="actions" style="text-align: center;">
+                <a href="{{ path('blackjack_round_end') }}" class="green-button" style="width: 200px;">End Round</a>
+            </div>
         {% endif %}
+
+
     </div>
 
     <div class="player-stats" style="margin-top: 20px;">
@@ -62,6 +80,7 @@
                     <th style="border: 1px solid black; padding: 8px;">Bet</th>
                     <th style="border: 1px solid black; padding: 8px;">Score</th>
                     <th style="border: 1px solid black; padding: 8px;">Status</th>
+                    <th style="border: 1px solid black; padding: 8px;">Standing</th>
                 </tr>
             </thead>
             <tbody>
@@ -75,9 +94,14 @@
                                 Bust
                             {% elseif loop.index == currentPlayer + 1 and not playersTurnsOver %}
                                 Current Turn
+                            {% elseif player.isStanding %}
+                                Standing
                             {% else %}
-                                In Game
+                                Playing
                             {% endif %}
+                        </td>
+                        <td style="border: 1px solid black; padding: 8px;">
+                            {{ player.isStanding ? 'Yes' : 'No' }}
                         </td>
                     </tr>
                 {% endfor %}

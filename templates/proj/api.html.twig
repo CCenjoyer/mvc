@@ -2,5 +2,42 @@
 
 {% block body %}
     <h1>Blackjack API</h1>
-    
+
+
+    <div class="api-section">
+        <h2>Create Game</h2>
+        <form action="{{ path('api_blackjack_create') }}" method="post">
+            <label for="numPlayers">Number of Players:</label>
+            <input type="number" id="numPlayers" name="numPlayers" value="1" min="1" max="10">
+            <button type="submit" class="btn btn-primary">Create Game</button>
+        </form>
+    </div>
+
+    <div class="api-section">
+        <h2>Get Players</h2>
+        <form action="{{ path('api_blackjack_players') }}" method="get">
+            <button type="submit" class="btn btn-primary">Get Players</button>
+        </form>
+    </div>
+
+    <div class="api-section">
+        <h2>Hit</h2>
+        <form action="{{ path('api_blackjack_hit') }}" method="post">
+            <button type="submit" class="btn btn-primary">Hit</button>
+        </form>
+    </div>
+
+    <div class="api-section">
+        <h2>Stand</h2>
+        <form action="{{ path('api_blackjack_stand') }}" method="post">
+            <button type="submit" class="btn btn-primary">Stand</button>
+        </form>
+    </div>
+
+    <div class="api-section">
+        <h2>Next Turn</h2>
+        <form action="{{ path('api_blackjack_next_turn') }}" method="post">
+            <button type="submit" class="btn btn-primary">Next Turn</button>
+        </form>
+    </div>
 {% endblock %}

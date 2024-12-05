@@ -1,0 +1,53 @@
+{% extends "proj/base.html.twig" %}
+
+{% block title %}Round End{% endblock %}
+
+{% block body %}
+    <div class="player-money" style="position: absolute; top: 20px; right: 20px;">
+        <h2>Player's Money</h2>
+        <p class="{{ money >= startingMoney ? 'money-positive' : 'money-negative' }}" style="font-size: 1.3em;">
+            {{ money }}
+        </p>
+    </div>
+
+    <h2>Round Results:</h2>
+
+    <div class="player-stats" style="margin-top: 20px;">
+        <h2>Dealer Score: {{ dealerScore }}</h2>
+        <h2>All Player Stats</h2>
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr>
+                    <th style="border: 1px solid black; padding: 8px;">Player</th>
+                    <th style="border: 1px solid black; padding: 8px;">Bet</th>
+                    <th style="border: 1px solid black; padding: 8px;">Score</th>
+                    <th style="border: 1px solid black; padding: 8px;">Result</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for player in players %}
+                    <tr>
+                        <td style="border: 1px solid black; padding: 8px;">Player {{ loop.index }}</td>
+                        <td style="border: 1px solid black; padding: 8px;">{{ player.getBet }}</td>
+                        <td style="border: 1px solid black; padding: 8px;">{{ player.getScore }}</td>
+                        <td style="border: 1px solid black; padding: 8px;">
+                            {% if dealerScore > 21 and not player.isBust %}
+                                Winner
+                            {% elseif player.getScore > dealerScore and not player.isBust %}
+                                Winner
+                            {% elseif player.getScore == dealerScore and not player.isBust %}
+                                Draw
+                            {% else %}
+                                Lost
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <form action="{{ path('blackjack_new_round') }}" method="post" style="margin-top: 20px;">
+        <button type="submit" class="blue-button" style="width: 200px;">Start New Round</button>
+    </form>
+{% endblock %}
