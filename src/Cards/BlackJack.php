@@ -7,69 +7,47 @@ use App\Cards\CardHand;
 use App\Cards\BlackJackPlayer;
 use App\Cards\CardGraphic;
 use App\Cards\BlackJackUtility;
-use phpDocumentor\Reflection\PseudoTypes\True_;
 
 class BlackJack
 {
     /**
      * @var BlackJackPlayer[]
      * */
-    private array $players;
+    public array $players;
     private DeckOfCards $deck;
     private BlackJackUtility $utility;
-    private CardHand $dealerHand;
-    private int $playerCount;
+    public CardHand $dealerHand;
+    public int $playerCount;
     public int $dealerScore;
-    private int $currentTurn;
-    private int $currentPlayerIndex;
-    private int $startingMoney;
-    private int $money;
-    public string $cardBack = '🂠';
+    public bool $dealerTurn = false;
+    public int $currentPlayerIndex;
+    public int $startingMoney;
+    public float $money;
 
     public function __construct(int $peoplePlaying = 1, int $startingMoney = 100)
     {
+        $this->dealerHand = new CardHand();
+        $this->utility = new BlackJackUtility();
         $this->deck = new DeckOfCards();
         $this->deck->makeDeck();
         $this->deck->shuffle();
 
+        $this->currentPlayerIndex = 0;
+        $this->dealerScore = 0;
         $this->startingMoney = $startingMoney;
         $this->money = $startingMoney;
         $this->playerCount = $peoplePlaying;
-        $this->currentPlayerIndex = 0;
-        $this->currentTurn = 0;
 
         for ($i = 0; $i < $peoplePlaying; $i++) {
             $this->players[] = new BlackJackPlayer();
         }
-
-        $this->dealerHand = new CardHand();
-        $this->dealerScore = 0;
-        $this->utility = new BlackJackUtility();
-    }
-
-    public function getCurrentPlayerIndex(): int
-    {
-        return $this->currentPlayerIndex;
-    }
-
-    public function getCurrentPlayer(): BlackJackPlayer
-    {
-        return $this->players[$this->getCurrentPlayerIndex()];
     }
 
     /**
-     * @return CardGraphic[]
+     * @param int $playerIndex
+     * @param int $amount
+     * @return void
      */
-    public function getDealerCards(): array
-    {
-        return $this->dealerHand->getCards();
-    }
-
-    public function getPlayerCount(): int
-    {
-        return $this->playerCount;
-    }
-
     public function placeBet(int $playerIndex, int $amount): void
     {
         $player = $this->players[$playerIndex];
@@ -78,127 +56,141 @@ class BlackJack
     }
 
     /**
-     * @return BlackJackPlayer[]
+     * Deals two cards to each player and the dealer
+     * @return void
      */
-    public function getPlayers(): array
-    {
-        return $this->players;
-    }
-
-    public function getDealer(): CardHand
-    {
-        return $this->dealerHand;
-    }
-
-    public function getMoney(): int
-    {
-        return $this->money;
-    }
-
-    public function getStartingMoney(): int
-    {
-        return $this->startingMoney;
-    }
-
-    public function updateDealerScore(): void
-    {
-        $this->dealerScore = $this->utility->countScore($this->dealerHand);
-    }
-
     public function dealInitialCards(): void
     {
-
         foreach ($this->players as $player) {
-            $score = 0;
             $player->addCard($this->deck->drawCard());
             $player->addCard($this->deck->drawCard());
-            $score = $this->utility->countScore($player->getHand());
-            $player->setScore($score);
         }
-
         $this->dealerHand->addCard($this->deck->drawCard());
         $this->dealerHand->addCard($this->deck->drawCard());
         $this->updateDealerScore();
     }
 
+    /**
+     * Checks if all players are standing or bust
+     * @return bool
+     */
     public function checkPlayersTurnsOver(): bool
     {
-        $done = false;
         foreach ($this->players as $player) {
-            // if ($player->isStanding() || $player->isBust() || $player->getBet() === 0)
-            if ($player->isStanding() || $player->isBust()) {
-                $done = true;
-                ;
+            if (!$player->isStanding() && !$player->isBust()) {
+                return false;
             }
         }
-        return $done;
+        $this->dealerTurn = true;
+        return true;
     }
 
     /**
-     * @return CardGraphic[]
+     * @return void
      */
-    public function getPlayerCards(int $handIndex): array
-    {
-        return $this->players[$handIndex]->getCards();
-    }
-
     public function nextTurn(): void
     {
-        $currentPlayerIndex = $this->currentPlayerIndex;
-
         $this->currentPlayerIndex++;
-        if ($currentPlayerIndex >= $this->playerCount - 1) {
+        if ($this->currentPlayerIndex >= $this->playerCount) {
             $this->currentPlayerIndex = 0;
-            $this->currentTurn++;
+        }
+        $allPlayersDone = true;
+        foreach ($this->players as $player) {
+            if (!$player->isStanding() && !$player->isBust()) {
+                $allPlayersDone = false;
+                break;
+            }
+        }
+        if ($allPlayersDone) {
+            $this->dealerTurn = true;
         }
     }
 
+    /**
+     * Calculates the outcome of the round and resets the game
+     * @return void
+     */
     public function nextRound(): void
     {
+        $newMoney = $this->money;
+        $dealerScore = $this->dealerScore;
+
+        foreach ($this->players as $player) {
+            $score = $player->getScore();
+            if ($score === 21 && $dealerScore !== 21) {
+                $newMoney += $player->getBet() * 2.5;
+            } elseif ($dealerScore > 21 && $score < 22) {
+                $newMoney += $player->getBet() * 2;
+            } elseif ($score === $dealerScore) {
+                $newMoney += $player->getBet();
+            } elseif ($score < 22 && $score > $dealerScore) {
+                $newMoney += $player->getBet() * 2;
+            }
+            $player->reset();
+        }
+
+        $this->money = $newMoney;
+
         $this->currentPlayerIndex = 0;
-        $this->currentTurn = 0;
         $this->dealerHand = new CardHand();
         $this->dealerScore = 0;
         $this->deck->makeDeck();
         $this->deck->shuffle();
+        $this->dealerTurn = false;
+        $this->dealInitialCards();
+    }
 
-        foreach ($this->players as $player) {
-            $player->reset();
+    /**
+     * Draws a card from the deck and adds it to the current player's hand
+     * @return void
+     */
+    public function hit(): void
+    {
+        $player = $this->players[$this->currentPlayerIndex];
+        $player->addCard($this->deck->drawCard());
+        if ($player->getScore() > 21 || $player->isStanding) {
+            $this->nextTurn();
         }
     }
 
-    public function hit(): void
-    {
-        $player = $this->getCurrentPlayer();
-        $player->addCard($this->deck->drawCard());
-
-        $this->updateScore($player);
-    }
-
+    /**
+     * Ends the current player's turn
+     * @return void
+     */
     public function stand(): void
     {
+        $player = $this->players[$this->currentPlayerIndex];
+        $player->isStanding = true;
         $this->nextTurn();
     }
 
-    public function updateScore(BlackJackPlayer $player): void
+    /**
+     * Updates the score of the dealer
+     * @return void
+     */
+    public function dealerDraw(): void
     {
-        $score = $this->utility->countScore($player->getHand());
-        $player->setScore($score);
-        if ($score > 21) {
-            $player->setBust(true);
-            $this->nextTurn();
-        }
-        if ($score === 21) {
-            $player->setBlackjack(true);
-            $this->nextTurn();
+        while ($this->dealerScore < 17) {
+            $this->dealerHand->addCard($this->deck->drawCard());
+            $this->updateDealerScore();
         }
     }
 
+    /**
+     * Updates the score of the dealer
+     * @return void
+     */
+    public function updateDealerScore(): void
+    {
+        $this->dealerScore = $this->utility->countScore($this->dealerHand);
+    }
+
+    /**
+     * Checks if the game is over
+     * @return bool
+     */
     public function isGameOver(): bool
     {
-        if ($this->getMoney() <= 0) {
-            return true;
-        }
-        return false;
+        return $this->money <= 0;
     }
 }
