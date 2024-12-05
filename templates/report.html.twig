@@ -302,8 +302,156 @@
             et CI/CD arbetsflöde där kod som pushas till GitHub automatiskt går igenom tester och kodkvalitetskontroller. Jag har också fördjupat mig inom dessa verktyg
             för att använda tillgiven information om problematiska delar koden för att identifiera samt förbättra och optimera dem.
         </p>
+    </div>
+
+
+    <div class="kmomcontent">
+        <h2 id="kmom10">Kmom07-Kmom10</h2>
+
+        <h3 class="kmomtextheader">Uppfyllda Krav:</h3>
+
+            <h4 class="kmomtextheader">Krav 1-3:</h4>
+
+            <p><strong>Innehåll och utseende</strong></p>
+            <p><u>Skapa en landningssida /proj som syns i navbaren på din report-sida. Denna sida är din förstasida på projektets webbplats.</u></p>
+            <p>
+                Länk till projektet finns i navbaren på den normala sidan, denna länk leder till landningsidan där man kan antingen påbärja spelet eller gå till about sidan för information
+                om spelet.
+            </p>
+            <p><u>Välj ditt fokus för ditt projekt. Implementera det i din webbplats under proj/.</u></p>
+            <p>
+                Själva projektet finns tillgängliga under rutter med proj/ startelse. Min fokus för projektet var spelet Black Jack då jag först tänkt implementera en klass som inheritar klassen GameTwentyOne från kmom03 och
+                sedan bygga funktionalitet på detta för att skapa ett fulländat blackjack spel. Fast I slutändan gjorde jag helt enkelt en helt egen klass som hanterar spelet.
+                BlackJack.php.
+            </p>
+            <p><u>Ditt projekt skall ha en stil och ett utseende som tydligt skiljer sig från din report-sida.</u></p>
+            <p>
+                Twigs från rutterna i projektet implementerar inte längre base twiggen som använts inom alla andra normala rutter inom applikationen och har istället en egen base twigg för
+                blackjack spelet. Detta gör att blackjack spelet har en helt egen stil och utseende som skiljer sig från resten av applikationen.
+            </p>
+
+            <p><u>Det skall utseendemässigt se ut som en ny webbplats så bygg en “ny” stylesheet eller modifiera din befintliga. Modifiera i någon omfattning färg, typsnitt och utseende på header och footer.</u></p>
+            <p>
+                Den nya base twiggen använder nya klasser och element som stylats separat inom stylesheeten för att skapa en ny stil för blackjack spelet.
+            </p>
+
+            <p><u>Skapa en separat navbar för projektet som enbart innehåller länkarna för projektet.</u></p>
+            <p>
+                En separat navbar finns för blackjack spelet som endast innehåller länkar för blackjack spelet.
+            </p>
+
+            <p><u>En sida /proj/about som ger en kort introduktion till ditt projekt och vad det handlar om.</u></p>
+            <p>
+                Länk till about sidan finns på landningssidan för blackjack spelet fanns kan också nås normalt genom direkt url och innehåller en kort introduktion till spelet.
+            </p>
+
+            <p><strong>Repo och dokumentation</strong></p>
+            <p><u>Ditt git repo skall ha en README.md.</u></p>
+            <p>Finns</p>
+            <p><u>Det skall finnas badges som är klickbara och leder till uppdaterade Scrutinizer rapporter för build, coverage och quality.</u></p>
+            <p>Finns med extra i README</p>
+            <p><u>Beskriv innehållet av repot och berätta varför det finns. som beskriver innehållet i någon omfattning.</u></p>
+            <p>Finns i README</p>
+            <p><u>Instruktion för hur man klonar och startar igång webbplatsen</u></p>
+            <p>Finns i README</p>
+            <p><u>Innehållet i docs/ skall vara uppdaterat</u></p>
+            <p>
+                Det är det.
+            </p>
+
+            <p><strong>Kodtäckning</strong></p>
+            <p><u>Sikta på över 90% kodtäckning (exkludera filer som inte är relevanta).</u></p>
+            <p>
+                Kodtäckning ligger på > 98% för täckning på klasser vilket jag antar är det som räknas som (relevant).
+                Har inte lagt någon fokus eller tid på at testa routes eller controllers i detta kmom då jag inte ansett det som nödvändigt
+                då näst intill all funktionalitet av spelet finns inom själva klassen.
+                Kodtäckning finns tillgängligt på /docs/coverage/index.html.
+            </p>
+            <p><u>Generera dokumentation med phpdoc.</u></p>
+            <p>
+                Dokumentation finns tillagd för alla nya klasser och controller routes.
+            </p>
+            <p><u>Generera metrics med phpmetrics.</u></p>
+            <p>
+                Uppdaterade Metrics finns genererade och finns tillgängliga på /docs/metrics/index.html.
+            </p>
+
+
+            <h4 class="kmomtextheader">Krav 4: JSON API:</h4>
+            <p><u>Skapa ett JSON API till dit projekt och presentera det i sidan proj/api.</u></p>
+            <p>
+                Routes för BlackJack som svarar med JSON data finns tillgängligt på /proj/api routes inom ApiBlackJackController kontrollern.
+            </p>
+
+            <p><u>Skapa minst 5 olika JSON routes varav minst en skall vara en POST route.</u></p>
+            <p>
+                Det finns 5 olika routes tillgängliga, alla kollar om BlackJack finns i sessionen, om inte så skapas en ny instans av spelet med 1 spelare och 100 i banken.
+                <ul>
+                    <li>Route som skapar en ny instans av spelet, detta är en post route som tar emot ett integer värde för hur många häder/spelare spelet ska bestå av.</li>
+                    <li>Route som ger alla spelare i spelet, deras status, poäng samt vilken den nuvarande spelaren är med currentPlayerIndex.</li>
+                    <li>Route som utför en (hit) i spelet, vilket drar ett kort för den nuvarande spelaren och svarar med JSON data om spelarna.</li>
+                    <li>Route som utför en (stand) i spelet, ändrar isStanding status för nuvarande spelare och ändrar index för nuvarande spelare till nästa. Svarar med spelare, deras status och poäng.</li>
+                    <li>Route som ändrar turn i spelet till nästa spelare och svarar med JSON data om currentPlayerIndex, vilket är den nuvarande spelaren.</li>
+                </ul>
+            </p>
+
+            <p><u>I sidan skall man kunna klicka på samtliga länkar/knappar för att testa ditt API.</u></p>
+            <p>
+                Alla rutter från ovan kan på Black Jack API landningssidan nås genom knappar, förutom post routen som
+                använder ett nummer från formuläret för att skapa en ny instans av spelet.
+            </p>
+
+        <h3 class="kmomtextheader">Genomföring:</h3>
+            <p><u>Var projektet lätt eller svårt?</u></p>
+            <p>
+                Projektet var inte speciellt svårt, fast krävde att man tänkte igenom hur din klass var strukturad och hur spelet skulle fungera med flera spelare.
+                Jag kände mig perfekt utrusted för att skapa och genomföra detta projekt då jag hade arbetat med samma klasser och strukturer tidigare i kursen,
+                detta var till dels på grund av att jag fortsatt arbeta inom samma kortklasser som jag skapat tidigare i kursen och redan hade en bra förståelse för hur
+                dem fungerar och hur dem kan användas.
+            </p>
+
+            <p><u>Tog det lång tid?</u></p>
+            <p>
+                För mig tog det runt 30 timmar att helt genomföra mitt projekt med krav 1-3 och json API:et. Hur lång tid det tar en tror jag till stor del
+                beror på vilket spel man beslutat sig utveckla, hur komplicerat spelet är, samt hur mycket man tänkt på kodstrukturen innan man börjar jobba.
+                Jag hade inte specielt mycket tid att implementera själva projektet men spenderade mycket tid på att tänka på hur jag skulle strukturera koden
+                och vilka rutter och klasser jag skulle behöva för att genomföra projektet. Detta ledde till att jag kunde genomföra projektet relativt snabbt
+                i form av tid spenderad på att skriva själva koden. Vilket också är sättet jag tycker om att arbeta på.
+            </p>
+            <p><u>Vad var svårt och vad gick lätt?</u></p>
+            <p>
+                Jag skulle nog inte säga att något var speciellt svårt, fast vissa delar av projektet var smidigare att implementera än andra.
+            </p>
+            <p><u>Var det ett bra och rimligt projekt för denna kursen?</u></p>
+            <p>
+                Väldigt rimligt, då det bygger på tidigare kmom och så länge man fortfarande besitter kunskaper om strukturen och hur klasserna fungerar så är det
+                ett bra projekt att arbeta med.
+            </p>
+
+        <h3 class="kmomtextheader">Tankar om kursen:</h3>
+            <p><u>Ge feedback till lärarna och förslå eventuella förbättringsförslag till kommande kurstillfällen.</u></p>
+            <p>
+                Jag tycker att mos:s föreläsningar är bra, informativa och ger bra instruktioner för att börja med uppgifterna. Detsamma med övningarna. Men det känns alltid som
+                att när man gjorde någonting för föreläsningarna eller övningarna så behövde man alltid repetera det igen för själva uppgiften vilket kändes lite onödigt.
+                Jag förstår meningen med att testa nya tekniker i ett säkert och kontrollerat utrymme, fast det kändes som att i vissa fall så var det lite onödigt att göra
+                det direkt i repot hade inte direkt gjort någonting annorlunda och hade bara sparat tid.
+            </p>
+            <p><u>Är du nöjd/missnöjd?</u></p>
+            <p>
+                Jag är väldigt nöjd, mest för att jag innan inte speciellt tyckt om PHP efter att ha arbetat med det i Webtek, fast nu känner jag att jag har en bra förståelse
+                för språket och hur det fungerar. I alla fall mycket bättre så än innan kursen.
+            </p>
+            <p><u>Kommer du att rekommendera kursen till dina vänner/kollegor?</u></p>
+            <p>
+                Jag skulle inte ha några som helst problem att rekommendera kursen till någon som en introduktion till att lära sig PHP och Symfony.
+            </p>
+            <p><u>På en skala 1-10, vilket betyg ger du kursen?</u></p>
+            <p>
+                Jag skulle ge den 8/10.
+            </p>
 
     </div>
 
-<h2 id="kmom07">Kmom07-Kmom10</h2>
+
+
 {% endblock %}
